@@ -1,8 +1,8 @@
-import React from 'react'
-import { Navbar } from './src/components/Navbar'
+import React from 'react';
+import { Header } from './src/components/Header';
 
 export const SerendipiaApp = () => {
   return (
-    <Navbar />
+    <Header />
   )
 }
