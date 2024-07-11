@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* src/fonts.css */
+@font-face {
+  font-family: 'October';
+  src: url('./fonts/OCTOBER.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'October', sans-serif;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
