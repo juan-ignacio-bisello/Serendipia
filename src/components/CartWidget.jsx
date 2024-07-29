@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export const CartWidget = () => {
+  
+  const [numberWidget, setNumberWidget] = useState(0);
+
   return (
-    <div>CartWidget</div>
+    <div className='flex flex-row pt-5 min-w-4 max-w-20' >CartWidget {numberWidget}</div>
   )
 }
