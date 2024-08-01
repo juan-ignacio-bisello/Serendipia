@@ -5,7 +5,7 @@ import { CartWidget } from './CartWidget';
 export const Header = () => {
 
   return (
-    <header className='inline-flex w-11/12 pt-5 pl-5' >
+    <header className='inline-flex w-11/12 py-4 pl-5' >
       <Logo className='flex items-center gap-x-10 opacity-90' />
       <span></span>
       <nav className='inline-flex flex-row items-center gap-x-10 opacity-90 pt-5 pl-5 w-auto '>
