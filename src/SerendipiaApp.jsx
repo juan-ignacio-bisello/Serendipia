@@ -6,7 +6,6 @@ export const SerendipiaApp = () => {
   return (
     <>
       <Navbar />
-      <CartWidget className='flex flex-row justify-end' />
       <ListItem />
     </>
     

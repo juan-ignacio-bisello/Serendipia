@@ -1,15 +1,12 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { LoginPage } from '../auth/pages/LoginPage';
-import { useAuthStore } from '../hooks/useAuthStore';
-import { SerendipiaApp } from '../SerendipiaApp';
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { LoginPage } from '../auth/pages/LoginPage'
+import { useAuthStore } from '../hooks/useAuthStore'
 
 export const AppRouter = () => {
 
-    // const { status } = useAuthStore();
+    const { status } = useAuthStore();
 
-    const authStatus = 'not-authenticated';
-
-    if ( authStatus === 'checking' ) {
+    if ( status === 'checking' ) {
         return (
           <h3>Cargando...</h3>
         )
@@ -17,13 +14,8 @@ export const AppRouter = () => {
 
     return (
         <Routes>
-            {
-                ( authStatus === 'not-authenticated' ) 
-                ? <Route path="/auth/*" element={ <LoginPage /> } />
-                : <Route path="/*" element={ <SerendipiaApp /> } />
-            }
-            
-            {/* <Route path='/*' element={ <Navigate to="/auth/login" />} /> */}
+            <Route path="/auth/*" element={ <LoginPage /> } />
+            <Route path='/*' element={ <Navigate to="/auth/login" />} />
         </Routes>
     )
 }
