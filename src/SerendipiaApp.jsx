@@ -1,12 +1,13 @@
-import { CartWidget, Header } from './components';
+import { CartWidget, ListItem, Navbar } from './components';
 
 
 export const SerendipiaApp = () => {
   console.log('SerendipiaApp');
   return (
     <>
-      <Header />
+      <Navbar />
       <CartWidget className='flex flex-row justify-end' />
+      <ListItem />
     </>
     
   )
