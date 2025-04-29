@@ -14,10 +14,12 @@ export const uiSlice = createSlice({
             }
         },
         decrement: (state, /* action */ ) => {
-            state.counter -= 1;
             if ( state.counter === 0 ) {
                 state.isCartWidgetEmpty = true;
+                return;
             }
+            state.counter -= 1;
+            
         },
     }
 });

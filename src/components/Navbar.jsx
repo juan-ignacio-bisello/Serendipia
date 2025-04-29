@@ -1,7 +1,6 @@
 import { Logo } from './Logo';
 
-export const Header = () => {
-
+export const Navbar = () => {
   return (
     <header className='inline-flex w-11/12 py-4 pl-5' >
       <Logo className='flex items-center gap-x-10 opacity-90' />
@@ -12,7 +11,16 @@ export const Header = () => {
         <a href="/projects">Productos</a>
         <a href="/contact">Contact</a>
       </nav>
-      
+      <button
+        className=''
+      >
+        Login
+      </button>
+      <button
+        className=''
+      >
+        Singin
+      </button>
     </header>
   )
 }
