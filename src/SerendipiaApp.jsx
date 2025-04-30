@@ -1,4 +1,4 @@
-import { CartWidget, ListItem, Navbar } from './components';
+import { ListItem, Navbar } from './components';
 
 
 export const SerendipiaApp = () => {
@@ -6,7 +6,12 @@ export const SerendipiaApp = () => {
   return (
     <>
       <Navbar />
-      <ListItem />
+      <ListItem 
+        image="public\ropa\pan1.jpg"
+        title="Producto de ejemplo"
+        price="29.99"
+        onAddToCart={() => console.log("Producto agregado")} 
+      />
     </>
     
   )
