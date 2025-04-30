@@ -1,6 +1,9 @@
 
 
-export const LoginScreen = () => {
+export const LoginPage = () => {
+
+    console.log('LoginPage');
+
     return (
         <div className="container login-container">
             <div className="row">

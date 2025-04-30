@@ -1,15 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux'
 
 export const useAuthStore = () => {
-    const {} = useSelector( status => status.auth );
-    const dispatch = useDispatch();
 
-    const startLogin = async({ email, password }) => {
-        
-    }
+  const { status } = useSelector( state => state.auth );
+  const dispatch = useDispatch();
 
 
-  return (
-    <div>useAuthStore</div>
-  )
+  return { 
+    // Propiedades
+    status 
+  }
 }
