@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+Colores principales:
+Fucsia vibrante (para acentos y botones): #e843c3
+
+Verde slime (elementos destacados, fondos creativos): #9be13c
+
+Negro oscuro (fondo principal): #1e1e1e
+
+Colores secundarios (para mantener balance visual):
+Gris claro (texto secundario, bordes): #bfbfbf
+
+Blanco hueso (fondos, contraste): #f5f5f5
+
+Rosa pastel (hover o detalles suaves): #fda4e3
+
+Colores de estado (para e-commerce):
+✅ Éxito: #71dd8a
+
+❌ Error: #f65a5a
+
+⚠️ Advertencia: #f7c948
+
+*/
+
 /* src/fonts.css */
 @font-face {
   font-family: 'October';
@@ -13,6 +37,13 @@
 body {
   font-family: 'October', sans-serif;
   background-color: #1e1e1e;
+}
+
+@media (min-width: 768px) {
+  .md\:text-base {
+      font-size: 1rem /* 16px */;
+      line-height: 1.5rem /* 24px */;
+  }
 }
 
 
@@ -27,8 +58,12 @@ body {
     transition-delay: 150ms;
     transition-duration: 250ms;
     border-radius: 0.5rem;
+    font-size: 0.875rem /* 14px */;
+    line-height: 1.25rem;
+
     --tw-text-opacity: 1;
     color: rgb(232 67 195 / var(--tw-text-opacity)) /* #e843c3 */;
+    
     background-color: #9be13c;
   }
   button:hover  {

@@ -1,4 +1,3 @@
-import './login.css';
 
 
 export const LoginScreen = () => {

@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { LoginPage } from '../auth/pages/LoginPage'
 import { useAuthStore } from '../hooks/useAuthStore'
+import { SerendipiaApp } from '../SerendipiaApp';
 
 export const AppRouter = () => {
 
@@ -15,7 +16,7 @@ export const AppRouter = () => {
     return (
         <Routes>
             <Route path="/auth/*" element={ <LoginPage /> } />
-            <Route path='/*' element={ <Navigate to="/auth/login" />} />
+            <Route path='/*' element={ <Navigate to={ <SerendipiaApp /> } /> } />
         </Routes>
     )
 }
