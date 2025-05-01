@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
-import { LoginPage } from '../auth/pages/LoginPage';
 import { useAuthStore } from '../hooks/useAuthStore';
-import { HomePage } from '../components';
+import { LoginPage } from '../auth/pages/LoginPage';
+import { HomePage } from '../commerce';
 
 export const AppRouter = () => {
 

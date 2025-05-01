@@ -1,80 +1,61 @@
+import { useDispatch } from "react-redux";
+import { useForm } from "../../hooks/useForm";
+import { checkingAuthentification } from "../../store";
 
+
+const loginFormFields = {
+    loginEmail: '',
+    loginPassword: '',
+}
 
 export const LoginPage = () => {
 
-    console.log('LoginPage');
+    const { email, password, onInputChange } = useForm(loginFormFields);
+
+    const dispatch = useDispatch();
+
+    const onSubmit = ( event ) => {
+        event.preventDefault();
+
+        dispatch( checkingAuthentification() );
+    }
 
     return (
-        <div className="container login-container">
-            <div className="row">
-                <div className="col-md-6 login-form-1">
-                    <h3>Ingreso</h3>
-                    <form>
+        <div className="flex size-2/3 place-content-center justify-self-center py-24">
+            <div className="table-row shadow-xl shadow-Gray justify-between p-28">
+                <div className="flex-row">
+                    <h3 className="text-White text-2xl">Ingreso</h3>
+                    <form onSubmit={ onSubmit }>
                         <div className="form-group mb-2">
                             <input 
                                 type="text"
-                                className="form-control"
+                                className="text-gray-500"
                                 placeholder="Correo"
+                                name="email"
+                                value={ email }
+                                onChange={ onInputChange }
                             />
                         </div>
                         <div className="form-group mb-2">
                             <input
                                 type="password"
-                                className="form-control"
+                                className="text-gray-500"
                                 placeholder="Contraseña"
+                                name="password"
+                                value={ password }
+                                onChange={ onInputChange }
                             />
                         </div>
-                        <div className="form-group mb-2">
-                            <input 
+                        <div>
+                            <button 
                                 type="submit"
-                                className="btnSubmit"
-                                value="Login" 
-                            />
+                                className="flex px-4 py-2 w-full justify-center text-lg text-Lime bg-Fuchsia"
+                            >Login</button>
                         </div>
                     </form>
                 </div>
 
-                <div className="col-md-6 login-form-2">
-                    <h3>Registro</h3>
-                    <form>
-                        <div className="form-group mb-2">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Nombre"
-                            />
-                        </div>
-                        <div className="form-group mb-2">
-                            <input
-                                type="email"
-                                className="form-control"
-                                placeholder="Correo"
-                            />
-                        </div>
-                        <div className="form-group mb-2">
-                            <input
-                                type="password"
-                                className="form-control"
-                                placeholder="Contraseña" 
-                            />
-                        </div>
-
-                        <div className="form-group mb-2">
-                            <input
-                                type="password"
-                                className="form-control"
-                                placeholder="Repita la contraseña" 
-                            />
-                        </div>
-
-                        <div className="form-group mb-2">
-                            <input 
-                                type="submit" 
-                                className="btnSubmit" 
-                                value="Crear cuenta" />
-                        </div>
-                    </form>
-                </div>
+                
             </div>
         </div>
     )

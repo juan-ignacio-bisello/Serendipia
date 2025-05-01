@@ -1,24 +1,24 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from 'firebase/firestore'
 import { getAnalytics } from "firebase/analytics";
+import { getFirestore  } from "firebase/firestore/lite";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCUJAZtW6MportVSMPbVMMkkzjgdThO1mA",
+  apiKey: "AIzaSyCV-RydqhCDjr7OEJZb-cUKxCYvBUALVCQ",
   authDomain: "serendipia-backend.firebaseapp.com",
+  databaseURL: "https://serendipia-backend-default-rtdb.firebaseio.com",
   projectId: "serendipia-backend",
-  storageBucket: "serendipia-backend.appspot.com",
+  storageBucket: "serendipia-backend.firebasestorage.app",
   messagingSenderId: "1081021373580",
-  appId: "1:1081021373580:web:356138cf5041d0223cafa9",
-  measurementId: "G-4663SHBMX9"
+  appId: "1:1081021373580:web:1d353e2c4f6c41de3cafa9",
+  measurementId: "G-T3KRG7GJPX"
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
- 
-export const analytics = getAnalytics(app);
-export const db = getFirestore(app);
+export const FirebaseApp = initializeApp(firebaseConfig);
+export const FirebaseAnalytics = getAnalytics(app);
+export const FirebaseBD = getFirestore( FirebaseApp );

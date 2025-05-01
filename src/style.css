@@ -62,9 +62,9 @@ body {
     line-height: 1.25rem;
 
     --tw-text-opacity: 1;
-    color: rgb(232 67 195 / var(--tw-text-opacity)) /* #e843c3 */;
+    color:  #9be13c;
     
-    background-color: #9be13c;
+    background-color: rgb(232 67 195 / var(--tw-text-opacity))/* #e843c3 */;
   }
   button:hover  {
     border-radius: 0.5rem;

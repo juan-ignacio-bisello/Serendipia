@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { increment } from "../store/ui/uiSlice";
+import { increment } from "../../store";
 
 
 export const ListItem = ({ image, title, price }) => {
