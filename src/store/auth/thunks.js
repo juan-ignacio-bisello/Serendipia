@@ -1,8 +1,8 @@
-import { singInWhithGoogle } from "../../DB/provider";
-import { onChecking } from "./authSlice";
+import { signInWithGoogle } from "../../DB/provider";
+import { onChecking, onLogin, onLogout } from "./authSlice";
 
 
-export const checkingAuthentification = ( email, password) => {
+export const checkingAuthentification = ( email, password ) => {
   
     return async( dispatch ) => {
 
@@ -11,10 +11,16 @@ export const checkingAuthentification = ( email, password) => {
   }
 }
 
-export const startGoogleSingin = async() => {
+export const startGoogleSingin = () => {
     return async( dispatch ) => {
         dispatch( onChecking() );
 
-        const results = await singInWhithGoogle();
+        const result = await signInWithGoogle();
+        if ( result.ok ) {
+          dispatch( onLogin( result ) );
+        } else {
+          dispatch( onLogout( result.errorMessage ) );
+        }
     }
 }
+
