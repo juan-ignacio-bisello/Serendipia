@@ -1,10 +1,18 @@
-import { useAuthStore } from '../../hooks/useAuthStore';
+import { useNavigate } from 'react-router-dom';
 import { CartWidget } from './CartWidget';
 import { Logo } from './Logo';
 
 export const Navbar = () => {
 
-  const { startLogout, startLogin } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate('/auth/login');
+  };
+
+  const handleRegister = () => {
+    navigate('/auth/register');
+  };
   
   return (
     <div className='flex items-center justify-between  py-4 px-5'>
@@ -22,13 +30,13 @@ export const Navbar = () => {
         <div className='flex-1 flex justify-end items-center gap-x-4'>
           <button 
             className='px-4 py-2'
-            onClick={ startLogin }
+            onClick={ handleLogin }
           >
             Login
           </button>
           <button 
             className='px-4 py-2'
-            onClick={ startLogout }
+            onClick={ handleRegister }
           >
             Signin
           </button>

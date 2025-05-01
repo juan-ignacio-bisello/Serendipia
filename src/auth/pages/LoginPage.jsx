@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "../../hooks/useForm";
 import { checkingAuthentification } from "../../store";
+import { useNavigate } from "react-router-dom";
 
 
 const loginFormFields = {
@@ -13,6 +14,13 @@ export const LoginPage = () => {
     const { email, password, onInputChange } = useForm(loginFormFields);
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+
+    const handleHome = () => {
+      navigate('/');
+    };
+
 
     const onSubmit = ( event ) => {
         event.preventDefault();
@@ -49,10 +57,22 @@ export const LoginPage = () => {
                         <div>
                             <button 
                                 type="submit"
-                                className="flex px-4 py-2 w-full justify-center text-lg text-Lime bg-Fuchsia"
+                                className="flex px-4 py-2 w-full justify-center text-lg"
                             >Login</button>
                         </div>
+                        
+                        
                     </form>
+                        
+                        <div className="flex mt-16">
+                            <button 
+                              className="flex px-4 py-2 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink"
+                              onClick={ handleHome }
+                            >
+                              Home
+                            </button>
+                        </div>
+                    
                 </div>
 
                 

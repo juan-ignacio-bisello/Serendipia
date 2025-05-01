@@ -16,6 +16,7 @@ export default {
       'Gray': '#bfbfbf',
       'White': '#f5f5f5',
       'Pink': '#fda4e3',
+      'Black': '#1e1e1e'
     }
   },
   plugins: [
