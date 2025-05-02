@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import { increment } from "../../store";
+import { useDispatch } from 'react-redux';
+import { increment } from '../../store';
 
 const products = [
   {
@@ -35,7 +35,7 @@ const products = [
     name: 'Focus Paper Refill',
     href: '#',
     price: '$89',
-    imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-03.jpg',
+    imageSrc: 'public/ropa/pan5.jpg',
     imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     color: 'Black',
   },
@@ -44,7 +44,34 @@ const products = [
     name: 'Machined Mechanical Pencil',
     href: '#',
     price: '$35',
-    imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-04.jpg',
+    imageSrc: 'public/ropa/pan2.jpg',
+    imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+    color: 'Black',
+  },
+  {
+    id: 5,
+    name: 'Machined Mechanical Pencil',
+    href: '#',
+    price: '$35',
+    imageSrc: 'public/ropa/pan1.jpg',
+    imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+    color: 'Black',
+  },
+  {
+    id: 6,
+    name: 'Machined Mechanical Pencil',
+    href: '#',
+    price: '$35',
+    imageSrc: 'public/ropa/pan3.jpg',
+    imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+    color: 'Black',
+  },
+  {
+    id: 7,
+    name: 'Machined Mechanical Pencil',
+    href: '#',
+    price: '$35',
+    imageSrc: 'public/ropa/pan4.jpg',
     imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
     color: 'Black',
   },

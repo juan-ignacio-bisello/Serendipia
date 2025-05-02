@@ -1,5 +1,8 @@
-import { signInWithGoogle } from "../../DB/provider";
-import { onChecking, onLogin, onLogout } from "./authSlice";
+import { collection, getDocs } from 'firebase/firestore';
+import { FirebaseBD } from '../../DB/firebaseConfig';
+import { signInWithGoogle } from '../../DB/provider';
+import { setProducts } from '../ui/productSlice';
+import { onChecking, onLogin, onLogout } from './authSlice';
 
 
 export const checkingAuthentification = ( email, password ) => {
@@ -23,4 +26,13 @@ export const startGoogleSingin = () => {
         }
     }
 }
+
+export const startLoadingProducts = () => {
+    return async (dispatch) => {
+      const productsRef = collection(FirebaseBD, 'productos');
+      const docs = await getDocs(productsRef);
+      const products = docs.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      dispatch(setProducts(products));
+    };
+  };
 

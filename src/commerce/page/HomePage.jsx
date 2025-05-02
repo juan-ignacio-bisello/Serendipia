@@ -1,5 +1,4 @@
-import { AlsoListItem, Navbar } from "../"
-import { Banner } from "../components/Banner"
+import { AlsoListItem, Carousel, Navbar } from '../';
 
 
 
@@ -10,7 +9,7 @@ export const HomePage = () => {
   return (
   <>
       <Navbar />
-      <Banner />
+      <Carousel />
       <AlsoListItem
         image="public\ropa\pan1.jpg"
         title="Producto de ejemplo"
