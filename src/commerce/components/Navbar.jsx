@@ -7,6 +7,9 @@ export const Navbar = () => {
 
   const navigate = useNavigate();
 
+  const handleHome = () => {
+    navigate('/');
+  };
   const handleLogin = () => {
     navigate('/auth/login');
   };
@@ -19,6 +22,17 @@ export const Navbar = () => {
     navigate('/product/add/*');
   }
 
+  const handlerBuzos = () => {
+    navigate('/product/buzos/*');
+  }
+
+  const handlerRemeras = () => {
+    navigate('/product/remeras/*');
+  }
+
+  const handlerPantalones = () => {
+    navigate('/product/pantalones/*');
+  }
   
   const { status } = useAuthStore();
   
@@ -30,10 +44,10 @@ export const Navbar = () => {
 
       <div className='flex items-center justify-between w-full py-4 px-5'>
         <div className='flex-1 flex justify-center gap-x-4'>
-          <button className='px-4 py-2 '>Home</button>
-          <button className='px-4 py-2'>Buzos</button>
-          <button className='px-4 py-2'>Remeras</button>
-          <button className='px-4 py-2'>Pantalones</button>
+          <button className='px-4 py-2' onClick={ handleHome }>Home</button>
+          <button className='px-4 py-2' onClick={ handlerBuzos }>Buzos</button>
+          <button className='px-4 py-2' onClick={ handlerRemeras }>Remeras</button>
+          <button className='px-4 py-2' onClick={ handlerPantalones }>Pantalones</button>
         </div>
         
         {
