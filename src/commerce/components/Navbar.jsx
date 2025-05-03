@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { CartWidget } from './CartWidget';
 import { Logo } from './Logo';
+import { useAuthStore } from '../../hooks/useAuthStore';
 
 export const Navbar = () => {
 
@@ -13,6 +14,13 @@ export const Navbar = () => {
   const handleRegister = () => {
     navigate('/auth/register');
   };
+
+  const handlerAdmin = () => {
+    navigate('/product/add/*');
+  }
+
+  
+  const { status } = useAuthStore();
   
   return (
     <div className='flex items-center justify-between  py-4 px-5'>
@@ -27,6 +35,17 @@ export const Navbar = () => {
           <button className='px-4 py-2'>Remeras</button>
           <button className='px-4 py-2'>Pantalones</button>
         </div>
+        
+        {
+          ( status === 'authenticated-ADMIN' ) ? (
+            <div className='flex-1 flex justify-center sm:ml-4 items-center gap-x-4'>
+              <button className='px-4 py-2 ' onClick={ handlerAdmin }>
+                ADMIN
+              </button>
+            </div> )
+            : <div></div>
+        }
+        
 
         <div className='flex-1 flex justify-end sm:ml-4 items-center gap-x-4'>
           <button 

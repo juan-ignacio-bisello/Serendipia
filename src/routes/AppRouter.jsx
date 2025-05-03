@@ -1,17 +1,11 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { useAuthStore } from '../hooks/useAuthStore';
 import { HomePage, ProductHandler } from '../commerce';
 import { AuthRoutes } from '../auth';
 import { AnimatePresence } from 'framer-motion';
 
 export const AppRouter = () => {
 
-    const { status } = useAuthStore();
     const location = useLocation();
-
-    // if ( status === 'checking' ) {
-    //     return <h3>Cargando...</h3>;
-    // }
 
     return (
         <AnimatePresence mode='wait'>
