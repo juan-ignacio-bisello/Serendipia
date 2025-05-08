@@ -36,3 +36,11 @@ export const startLoadingProducts = () => {
     };
   };
 
+export const StartCreatedUserWithEmailPassword = ({ email, password, displayName }) => {
+  return async( dispatch ) => {
+      dispatch( onChecking() );
+      const { ok, uid, photoURL, errorMessage } = await registerUserWithEmailPassword({ email, password, displayName });
+      if ( !ok ) return dispatch( onLogout({ errorMessage }) );
+      dispatch( onLogin({ uid, displayName, email, photoURL }) );
+  }
+}

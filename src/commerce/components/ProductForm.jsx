@@ -48,7 +48,13 @@ export const ProductForm = () => {
           imageUrl,
         };
     
-        await addDoc(collection(FirebaseBD, `products/${productData.category}`), productData);
+        try {
+          // Guardar en colección general de productos
+          await addDoc(collection(FirebaseBD, `${productData.category}`), productData);
+          console.log(`Producto ${productData.name} subido con éxito`);
+        } catch (error) {
+          console.error('Error subiendo producto:', error.message);
+        }
     
         alert('Producto subido con éxito');
     

@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { motion } from 'framer-motion';
 import { useForm } from "../../hooks/useForm";
-import { checkingAuthentification } from "../../store";
+import { checkingAuthentification, startGoogleSingin } from "../../store";
 import { useNavigate } from "react-router-dom";
 
 
@@ -17,6 +17,10 @@ export const LoginPage = () => {
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
+
+    const onGoogleSingin = () => {
+             dispatch( startGoogleSingin() );
+    }
 
     const handleHome = () => {
       navigate('/');
@@ -73,18 +77,25 @@ export const LoginPage = () => {
                                 >Login</button>
                             </div>
 
+                            <button 
+                              className="flex mt-12 px-4 py-2 w-full justify-center text-lg"
+                              onClick={ onGoogleSingin }
+                            >
+                              Google
+                            </button>
+
 
                         </form>
 
-                            <div className="flex mt-16">
+                            <div className="flex mt-12 gap-4">
                                 <button 
-                                  className="flex px-4 py-2 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink"
+                                  className="flex px-4 py-2 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink hover:shadow-lg hover:shadow-Pink"
                                   onClick={ handleHome }
                                 >
                                   Home
                                 </button>
                                 <button 
-                                  className="flex px-4 py-2 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink"
+                                  className="flex px-4 py-2 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink hover:shadow-lg hover:shadow-Pink"
                                   onClick={ handleRegister }
                                 >
                                   Register
