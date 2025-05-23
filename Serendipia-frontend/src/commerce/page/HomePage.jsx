@@ -1,4 +1,4 @@
-import { AlsoListItem, Carousel, Navbar } from '../';
+import { AlsoListItem, Carousel } from '../';
 
 
 
@@ -8,7 +8,6 @@ export const HomePage = () => {
   
   return (
   <>
-      <Navbar />
       <Carousel />
       <AlsoListItem
         image="public\ropa\pan1.jpg"

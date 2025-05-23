@@ -3,11 +3,18 @@ import { createSlice } from '@reduxjs/toolkit';
 export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
+        isItemModalOpen: false,
         isCartWidgetEmpty: true,
         isActiveEvent: false,
         counter: 0
     },
     reducers: {
+        onItemModalOpen: ( state ) => {
+            state.isItemModalOpen = true;
+        },
+        onItemModalClose: ( state ) => {
+            state.isItemModalOpen = false;
+        },
         increment: ( state ) => {
             state.counter += 1;
             if ( state.counter >= 1 ) {
@@ -32,4 +39,4 @@ export const uiSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, reset } = uiSlice.actions;
+export const { onItemModalOpen, onItemModalClose, increment, decrement, reset } = uiSlice.actions;
