@@ -9,6 +9,7 @@ const app = express();
 // Directorio publico
 app.use( express.static('public') );
 
+app.use( express.json() );
 // Rutas
 // todo: crear rutas
 app.use( '/api/auth', require('./routes/auth') );
