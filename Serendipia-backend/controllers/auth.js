@@ -1,19 +1,31 @@
 const { response } = require("express");
-const { validationResult } = require('express-validator');
+const User = require('../models/UserModel');
+// Controlador de autenticación para manejar el registro, inicio de sesión y renovación de token
+// Este controlador se encarga de las operaciones relacionadas con la autenticación de usuarios
+// como el registro, inicio de sesión y renovación de token JWT.
 
 
-const createUser = (req, res = response ) => {
+const createUser = async(req, res = response ) => {
 
     const { name, email, password } = req.body;
-    
 
-    return res.status(201).json({
-        ok: true,
-        msg: 'register',
-        name,
-        email,
-        password,
-    });
+    try {
+
+        const user = new User({ name, email, password });
+        await user.save();
+
+        return res.status(201).json({
+            ok: true,
+            msg: 'register',
+        });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'Error al crear el usuario',
+            error: error.message || 'Error inesperado'
+        });
+    }
+    
 };
 
 const loginUser = (req, res = response) => {
