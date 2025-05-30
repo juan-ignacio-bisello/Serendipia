@@ -4,9 +4,11 @@
 */
 const { Router } = require('express');
 const { check } = require('express-validator');
+
 const router = Router();
 
 const { createUser, loginUser, renewToken } = require('../controllers/auth');
+const { validationfields } = require('../middlewares/field-validator');
 
 router.get('/', (req, res) => {
     res.json({
@@ -25,6 +27,7 @@ router.post('/',
         check('email', 'Valid email is required').not().isEmpty(),
         check('email', 'Invalid email format').isEmail(),
         check('password', 'Password is required').not().isEmpty(),
+        validationfields
     ], 
     loginUser 
 );
@@ -33,10 +36,10 @@ router.post(
     '/new', 
     [
         check('name', 'Name is required').not().isEmpty(),
-        
+
         check('email', 'Invalid email format').isEmail(),
         check('email', 'Valid email is required').not().isEmpty(),
-        
+
         check('password', 'Password is required').not().isEmpty(),
         check('password')
             .isLength({ min: 8 }).withMessage('Password must be at least 8 characters long')
@@ -44,6 +47,8 @@ router.post(
             .matches(/[a-z]/).withMessage('Password must contain at least one lowercase letter')
             .matches(/[0-9]/).withMessage('Password must contain at least one number')
             .matches(/[\W_]/).withMessage('Password must contain at least one special character'),
+            
+        validationfields
     ],
     createUser 
 );
