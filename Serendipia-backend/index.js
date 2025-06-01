@@ -1,6 +1,6 @@
-
 const express = require('express');
 require('dotenv').config(); 
+const cors = require('cors');
 // BD
 const { dbConnection } = require('./DB/config');
 
@@ -10,6 +10,9 @@ const app = express();
 
 // Conectar a la base de datos
 dbConnection();
+
+// CORS
+app.use(cors());
 
 // Directorio publico
 app.use( express.static('public') );

@@ -9,6 +9,7 @@ const router = Router();
 
 const { createUser, loginUser, renewToken } = require('../controllers/auth');
 const { validationfields } = require('../middlewares/field-validator');
+const { validateJWT } = require('../middlewares/validate-jwt');
 
 router.get('/', (req, res) => {
     res.json({
@@ -16,11 +17,6 @@ router.get('/', (req, res) => {
         msg: 'get auth',
     });
 });
-
-router.get(
-    '/renew', 
-    renewToken
-);
 
 router.post('/',
     [
@@ -51,6 +47,11 @@ router.post(
         validationfields
     ],
     createUser 
+);
+
+
+router.get(
+    '/renew', validateJWT, renewToken
 );
 
 
