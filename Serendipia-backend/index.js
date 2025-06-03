@@ -22,6 +22,8 @@ app.use( express.json() );
 // todo: crear rutas
 app.use( '/api/auth', require('./routes/auth') );
 
+app.use( '/api/clothes', require('./routes/clothes') );
+
 
 // Escuchar peticiones
 app.listen( process.env.PORT, () => {
