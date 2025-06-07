@@ -2,6 +2,7 @@
 // Controlador para manejar las operaciones relacionadas con la ropa
 // Este controlador se encarga de las operaciones CRUD para la ropaconst { response } = require("express");
 
+const { response } = require('express');
 const Clothes = require('../models/ClothesModel');
 
 
@@ -23,11 +24,15 @@ const getClothes = async (req, res = response) => {
 }
 
 const createClothes = async (req, res = response) => {
-    const { name, price, stock, category, image } = req.body;
-
+    
     try {
-        const newClothes = new Clothes({ name, price, stock, category, image });
+ 
+        const { name, description, price, stock, category, size } = req.body;
+        const image = req.file ? req.file.filename : null;
+
+        const newClothes = new Clothes({ name, description, price, stock, category, image, size });
         await newClothes.save();
+
         res.status(201).json({
             ok: true,
             clothes: newClothes

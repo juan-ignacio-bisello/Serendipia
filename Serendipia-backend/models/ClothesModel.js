@@ -31,15 +31,8 @@ const ClothesSchema = Schema({
         enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL'], // tamaños predefinidos
         trim: true
     },
-    img: {
-        type: String,
-        required: [true, 'Image URL is required'],
-        validate: {
-            validator: function (value) {
-                return /^(https?:\/\/.*\.(?:png|jpg|jpeg))$/i.test(value); // validar URL de imagen
-            },
-            message: 'Image URL must be a valid URL ending with .png, .jpg, or .jpeg'
-        }
+    image: {
+        type: String
     },
     stock: {
         type: Number,

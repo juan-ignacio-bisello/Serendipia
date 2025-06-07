@@ -36,6 +36,7 @@ coverage/
 test-output/
 
 # Base de datos local
+uploads/
 dump/
 *.local.db
 *.sqlite

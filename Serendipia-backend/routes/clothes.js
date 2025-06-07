@@ -8,17 +8,20 @@ const router = Router();
 
 const { getClothes, createClothes, updateStockClothes, deleteClothes } = require('../controllers/clothes');
 const { validationfields } = require('../middlewares/field-validator');
+const upload = require('../middlewares/multer-config');
 
 router.get('/', getClothes);
 
 router.post(
     '/',
+    upload.single('image'),
     [
         check('name', 'Name is required').not().isEmpty(),
+        check('description', 'Description is required').not().isEmpty(),
         check('price', 'Price must be a number').isNumeric(),
         check('stock', 'Stock must be a number').isNumeric(),
         check('category', 'Category is required').not().isEmpty(),
-        check('image', 'Image URL is required').not().isEmpty(),
+        check('size', 'Size is required').not().isEmpty(),
         validationfields
     ],
     createClothes
@@ -29,10 +32,12 @@ router.put(
     [
         check('id', 'Invalid ID format').isMongoId(),
         check('name', 'Name is required').not().isEmpty(),
+        check('description', 'Description is required').not().isEmpty(),
         check('price', 'Price must be a number').isNumeric(),
         check('stock', 'Stock must be a number').isNumeric(),
         check('category', 'Category is required').not().isEmpty(),
         check('image', 'Image URL is required').not().isEmpty(),
+        check('size', 'Size is required').not().isEmpty(),
         validationfields
     ],
     updateStockClothes

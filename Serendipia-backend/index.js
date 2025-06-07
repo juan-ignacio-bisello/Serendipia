@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 require('dotenv').config(); 
 const cors = require('cors');
 // BD
@@ -14,12 +15,15 @@ dbConnection();
 // CORS
 app.use(cors());
 
+// Servir la carpeta 'uploads' de forma estática
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Directorio publico
 app.use( express.static('public') );
 
 app.use( express.json() );
+
 // Rutas
-// todo: crear rutas
 app.use( '/api/auth', require('./routes/auth') );
 
 app.use( '/api/clothes', require('./routes/clothes') );
