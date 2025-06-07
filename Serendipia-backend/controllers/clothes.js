@@ -3,6 +3,8 @@
 // Este controlador se encarga de las operaciones CRUD para la ropaconst { response } = require("express");
 
 const { response } = require('express');
+const fs = require('fs');
+const path = require('path');
 const Clothes = require('../models/ClothesModel');
 
 
@@ -47,9 +49,10 @@ const createClothes = async (req, res = response) => {
     }
 }
 
-const updateStockClothes = async (req, res = response) => {
+
+const updateClothes = async (req, res = response) => {
     const { id } = req.params;
-    const { stock } = req.body;
+    const { name, description, price, stock, category, size } = req.body;
 
     try {
         const clothes = await Clothes.findById(id);
@@ -59,23 +62,52 @@ const updateStockClothes = async (req, res = response) => {
                 msg: 'Ropa no encontrada'
             });
         }
-        clothes.stock = stock;
+
+        // Guardar el nombre de la imagen anterior antes de actualizar
+        const previousImage = clothes.image;
+
+        // Actualizar campos
+        clothes.name = name || clothes.name;
+        clothes.description = description || clothes.description;
+        clothes.price = price ?? clothes.price;
+        clothes.stock = stock ?? clothes.stock;
+        clothes.category = category || clothes.category;
+        clothes.size = size || clothes.size;
+
+        // Actualizar imagen si viene nueva
+        if (req.file) {
+            clothes.image = req.file.filename;
+        }
+
         await clothes.save();
-        res.status(200).json({
+
+        // Eliminar imagen anterior si se subió una nueva
+        if (req.file && previousImage && previousImage !== clothes.image) {
+            const imagePath = path.join(__dirname, '../uploads/clothes/', previousImage);
+            if (fs.existsSync(imagePath)) {
+                fs.unlinkSync(imagePath);
+            }
+        }
+
+        return res.status(200).json({
             ok: true,
             clothes
         });
+
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             ok: false,
-            msg: 'Error al actualizar el stock de la ropa',
-            error: error.message || 'Error inesperado'
+            msg: 'Error al actualizar la prenda',
+            error: error.message
         });
     }
-}
+};
+
 
 const deleteClothes = async (req, res = response) => {
+
     const { id } = req.params;
+
     try {
         const clothes = await Clothes.findByIdAndDelete(id);
         if (!clothes) {
@@ -88,6 +120,7 @@ const deleteClothes = async (req, res = response) => {
             ok: true,
             msg: 'Ropa eliminada correctamente'
         });
+
     } catch (error) {
         res.status(500).json({
             ok: false,
@@ -102,6 +135,6 @@ const deleteClothes = async (req, res = response) => {
 module.exports = {
     getClothes,
     createClothes,
-    updateStockClothes,
+    updateClothes,
     deleteClothes 
 };

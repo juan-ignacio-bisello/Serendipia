@@ -22,6 +22,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use( express.static('public') );
 
 app.use( express.json() );
+app.use( express.urlencoded({ extended: true }) );
 
 // Rutas
 app.use( '/api/auth', require('./routes/auth') );
