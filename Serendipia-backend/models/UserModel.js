@@ -47,6 +47,11 @@ const UserSchema = Schema({
             }
         ]
     },
+    role: {
+        type: String,
+        enum: ['USER', 'authenticated-ADMIN'], // roles permitidos
+        default: 'USER' // rol
+    },
     img: {
         // opcional 
         type: String

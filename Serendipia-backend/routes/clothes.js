@@ -9,6 +9,8 @@ const router = Router();
 const { getClothes, createClothes, updateStockClothes, deleteClothes } = require('../controllers/clothes');
 const { validationfields } = require('../middlewares/field-validator');
 const upload = require('../middlewares/multer-config');
+const { validateJWT } = require('../middlewares/validate-jwt');
+const { validateAdminRole } = require('../middlewares/validate-admin-role');
 
 router.get('/', getClothes);
 
@@ -16,6 +18,8 @@ router.post(
     '/',
     upload.single('image'),
     [
+        validateJWT,
+        validateAdminRole,
         check('name', 'Name is required').not().isEmpty(),
         check('description', 'Description is required').not().isEmpty(),
         check('price', 'Price must be a number').isNumeric(),
@@ -30,6 +34,8 @@ router.post(
 router.put(
     '/:id',
     [
+        validateJWT,
+        validateAdminRole,
         check('id', 'Invalid ID format').isMongoId(),
         check('name', 'Name is required').not().isEmpty(),
         check('description', 'Description is required').not().isEmpty(),
@@ -46,6 +52,8 @@ router.put(
 router.delete(
     '/:id',
     [
+        validateJWT,
+        validateAdminRole,
         check('id', 'Invalid ID format').isMongoId(),
         validationfields
     ],

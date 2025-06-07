@@ -9,7 +9,7 @@ const { generateJWT } = require("../helpers/jwt");
 
 const createUser = async(req, res = response ) => {
 
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
     try {
 
@@ -32,12 +32,13 @@ const createUser = async(req, res = response ) => {
         await user.save();
 
         // Generar un token JWT
-        const token = await generateJWT(user.id, user.name);
+        const token = await generateJWT(user.id, user.name, user.role);
         
         return res.status(201).json({
             ok: true,
             uid: user.id,
             name: user.name,
+            role: user.role,
             token
         });
 
@@ -76,11 +77,12 @@ const loginUser = async(req, res = response) => {
         }
 
         // Generar un token JWT
-        const token = await generateJWT(user.id, user.name);
+        const token = await generateJWT(user.id, user.name, user.role || 'USER');
         return res.status(200).json({
             ok: true,
             uid: user.id,
             name: user.name,
+            role: user.role || 'USER',
             token
         });
         
@@ -97,13 +99,15 @@ const loginUser = async(req, res = response) => {
 const renewToken = async(req, res) => {
     const uid = req.uid;
     const name = req.name;
+    const role = req.role || 'USER';
 
-    const token = await generateJWT(uid, name);
+    const token = await generateJWT(uid, name, role);
 
     res.status(200).json({
         ok: true,
         uid,
         name,
+        role,
         token
     });
 };
