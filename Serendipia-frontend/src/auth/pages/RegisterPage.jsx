@@ -1,28 +1,29 @@
-import { useDispatch } from "react-redux";
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from "../../hooks/useForm";
-import { startGoogleSingin } from "../../store";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../hooks/useAuthStore";
+import Swal from 'sweetalert2';
 
 
 const registerFormFields = {
     registerName:      '',
-        registerEmail:     '',
-        registerPassword:  '',
+    registerEmail:     '',
+    registerPassword:  '',
     registerPassword2: '',
 }
 
 export const RegisterPage = () => {
 
-    const dispatch = useDispatch();
+    const { startRegister, errorMessage } = useAuthStore();
 
     const { 
         registerName,
         registerEmail,
         registerPassword,
         registerPassword2,
-        onInputChange: onInputChangeReg 
-    } = useForm(registerFormFields);
+        onInputChange 
+    } = useForm( registerFormFields );
 
     const navigate = useNavigate();
 
@@ -34,14 +35,25 @@ export const RegisterPage = () => {
     };
 
     const onSubmit = ( event ) => {
-            event.preventDefault();
-    
-            dispatch( checkingAuthentification() );
+      event.preventDefault();
+
+      if ( registerPassword !== registerPassword2 ) {
+        return Swal.fire('Error en el registro', 'Las contraseñas deben coincidir', 'error');
+      }
+      
+      startRegister({
+        name: registerName,
+        email: registerEmail,
+        password: registerPassword,
+        password2: registerPassword2
+      });
     }
 
-    const onGoogleSingin = () => {
-         dispatch( startGoogleSingin() );
-    }
+    useEffect(() => {
+          if ( errorMessage && typeof errorMessage === 'string' ) {
+            Swal.fire('Error en la autentificación', errorMessage, 'error' );
+          }
+        }, [errorMessage])
 
   return (
     <>
@@ -55,7 +67,7 @@ export const RegisterPage = () => {
         <div className="flex size-2/3 place-content-center justify-self-center py-24">
           <div className="table-row shadow-xl shadow-Gray justify-between p-28"> 
             <h3 className="text-White text-2xl">Registro</h3>
-            <form>
+            <form onSubmit={ onSubmit}>
               <div className="mb-2">
                 <input
                   type="text"
@@ -63,7 +75,7 @@ export const RegisterPage = () => {
                   placeholder="Nombre"
                   name="registerName"
                   value={registerName}
-                  onChange={onInputChangeReg}
+                  onChange={onInputChange}
                 />
               </div>
               <div className="flex mb-2">
@@ -73,7 +85,7 @@ export const RegisterPage = () => {
                   placeholder="Correo"
                   name="registerEmail"
                   value={registerEmail}
-                  onChange={onInputChangeReg}
+                  onChange={onInputChange}
                 />
               </div>
               <div className="flex mb-2">
@@ -83,7 +95,7 @@ export const RegisterPage = () => {
                   placeholder="Contraseña"
                   name="registerPassword"
                   value={registerPassword}
-                  onChange={onInputChangeReg}
+                  onChange={onInputChange}
                 />
               </div>
               <div className="flex mb-2">
@@ -93,7 +105,7 @@ export const RegisterPage = () => {
                   placeholder="Repita la contraseña"
                   name="registerPassword2"
                   value={registerPassword2}
-                  onChange={onInputChangeReg}
+                  onChange={onInputChange}
                 />
               </div>
               <div className="flex mb-2">
@@ -108,12 +120,12 @@ export const RegisterPage = () => {
             </form>
 
               <div className="flex-row mt-3 justify-center pt-5">
-                <button 
+                {/* <button 
                   className="flex px-4 py-2 w-full justify-center text-lg"
                   onClick={ onGoogleSingin }
                 >
                   Google
-                </button>
+                </button> */}
                 <div className="flex mt-16">
                   <button 
                     className="flex px-4 py-2 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink"

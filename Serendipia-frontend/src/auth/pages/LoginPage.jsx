@@ -1,8 +1,9 @@
-import { useDispatch } from "react-redux";
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from "../../hooks/useForm";
-import { checkingAuthentification, startGoogleSingin } from "../../store";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from '../../hooks/useAuthStore';
+import Swal from 'sweetalert2';
 
 
 const loginFormFields = {
@@ -12,30 +13,36 @@ const loginFormFields = {
 
 export const LoginPage = () => {
 
-    const { email, password, onInputChange } = useForm(loginFormFields);
-
-    const dispatch = useDispatch();
+    const { startLogin, errorMessage } = useAuthStore();
+    const { loginEmail, loginPassword, onInputChange } = useForm( loginFormFields );
 
     const navigate = useNavigate();
 
-    const onGoogleSingin = () => {
-             dispatch( startGoogleSingin() );
-    }
 
     const handleHome = () => {
       navigate('/');
     };
 
     const handleRegister = () => {
-        navigate('/auth/register');
+      navigate('/auth/register');
     };
 
 
     const onSubmit = ( event ) => {
-        event.preventDefault();
+      event.preventDefault();
 
-        dispatch( checkingAuthentification() );
+      startLogin({
+          email: loginEmail,
+          password: loginPassword
+        });
     }
+
+    useEffect(() => {
+      if ( errorMessage && typeof errorMessage === 'string' ) {
+        Swal.fire('Error en la autentificación', errorMessage, 'error' );
+      }
+    }, [errorMessage])
+    
 
     return (
         <motion.div
@@ -55,8 +62,8 @@ export const LoginPage = () => {
                                     type="text"
                                     className="text-gray-500"
                                     placeholder="Correo"
-                                    name="email"
-                                    value={ email }
+                                    name="loginEmail"
+                                    value={ loginEmail }
                                     onChange={ onInputChange }
                                 />
                             </div>
@@ -65,8 +72,8 @@ export const LoginPage = () => {
                                     type="password"
                                     className="text-gray-500"
                                     placeholder="Contraseña"
-                                    name="password"
-                                    value={ password }
+                                    name="loginPassword"
+                                    value={ loginPassword }
                                     onChange={ onInputChange }
                                 />
                             </div>
@@ -77,12 +84,12 @@ export const LoginPage = () => {
                                 >Login</button>
                             </div>
 
-                            <button 
+                            {/* <button 
                               className="flex mt-12 px-4 py-2 w-full justify-center text-lg"
                               onClick={ onGoogleSingin }
                             >
                               Google
-                            </button>
+                            </button> */}
 
 
                         </form>

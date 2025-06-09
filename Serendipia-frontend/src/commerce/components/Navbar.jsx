@@ -1,11 +1,15 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartWidget } from './CartWidget';
 import { Logo } from './Logo';
-import { useAuthStore } from '../../hooks/useAuthStore';
+import { useAuthStore } from '../../hooks';
 
 export const Navbar = () => {
 
   const navigate = useNavigate();
+  
+  const { status, user, startLogout } = useAuthStore();
+  const role = user?.role;
 
   const handleHome = () => {
     navigate('/');
@@ -19,7 +23,19 @@ export const Navbar = () => {
   };
 
   const handlerAdmin = () => {
-    navigate('/product/add/*');
+    // Check if the user is authenticated as ADMIN
+    // If authenticated, navigate to the admin page
+      
+      if ( status === 'authenticated' && role === 'authenticated-ADMIN' ) {
+          return navigate('/product/add/*');
+        } else {
+          // If not authenticated as ADMIN, redirect to home
+          console.log('No tienes permisos de administrador');
+          // Optionally, you can show an alert or message to the user
+          alert('No tienes permisos de administrador');
+          return navigate('/');
+        }
+    
   }
 
   const handlerBuzos = () => {
@@ -33,8 +49,6 @@ export const Navbar = () => {
   const handlerPantalones = () => {
     navigate('/product/pantalones/*');
   }
-  
-  const { status } = useAuthStore();
   
   return (
     <div className='flex items-center justify-between  py-4 px-5'>
@@ -51,29 +65,48 @@ export const Navbar = () => {
         </div>
         
         {
-          ( status === 'authenticated-ADMIN' ) ? (
-            <div className='flex-1 flex justify-center sm:ml-4 items-center gap-x-4'>
-              <button className='px-4 py-2 ' onClick={ handlerAdmin }>
-                ADMIN
-              </button>
-            </div> )
-            : <div></div>
-        }
+          status === 'authenticated' && role === 'authenticated-ADMIN' && (
+          <div className='flex-1 flex justify-center sm:ml-4 items-center gap-x-4'>
+            <button className='px-4 py-2 ' onClick={handlerAdmin}>
+              ADMIN
+            </button>
+          </div>
+        )}
         
 
         <div className='flex-1 flex justify-end sm:ml-4 items-center gap-x-4'>
-          <button 
-            className='px-4 py-2'
-            onClick={ handleLogin }
-          >
-            Login
-          </button>
-          <button 
-            className='px-4 py-2'
-            onClick={ handleRegister }
-          >
-            Signin
-          </button>
+          {
+            ( status !== 'authenticated' )
+            ? (
+              <div className='flex-1 flex justify-end sm:ml-4 items-center gap-x-4'>
+                <button 
+                  className='px-4 py-2'
+                  onClick={ handleLogin }
+                >
+                  Login
+                </button>
+
+                <button 
+                  className='px-4 py-2'
+                  onClick={ handleRegister }
+                >
+                  Signin
+                </button>
+              </div>
+            )
+            : (
+              <button
+                className='px-4 py-2'
+                onClick={ () => {
+                    startLogout();
+                    navigate('/');
+                  }
+                }
+              >
+                Logout
+              </button>
+            )
+          }
           <CartWidget />
         </div>
       </div>

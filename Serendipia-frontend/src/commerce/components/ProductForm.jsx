@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { addDoc, collection } from 'firebase/firestore/lite';
-import { FirebaseBD } from '../../DB/firebaseConfig';
 import { uploadImage } from '../../helpers';
 import { useNavigate } from 'react-router-dom';
 
@@ -152,7 +150,21 @@ export const ProductForm = () => {
           required
         />
 
-        <input
+        <select
+          name="category"
+          placeholder="Categoría"
+          className="w-full border p-2 rounded text-Gray"
+          value={formValues.category}
+          onChange={handleChange}
+          required
+        >
+          <option value="" disabled selected>Categoría</option>
+          <option value="Pantalones">Pantalones</option>
+          <option value="Remeras">Remeras</option>
+          <option value="Buzos">Buzos</option>
+        </select>
+
+        {/* <input
           type="text"
           name="category"
           placeholder="Categoría"
@@ -160,7 +172,7 @@ export const ProductForm = () => {
           value={formValues.category}
           onChange={handleChange}
           required
-        />
+        /> */}
 
         <button
           type="submit"
