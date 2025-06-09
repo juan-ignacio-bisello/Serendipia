@@ -3,14 +3,12 @@
 
 const { Router } = require('express');
 const { check } = require('express-validator');
-
-const router = Router();
-
 const { getClothes, createClothes, updateClothes, deleteClothes } = require('../controllers/clothes');
 const { validationfields } = require('../middlewares/field-validator');
-const upload = require('../middlewares/multer-config');
 const { validateJWT } = require('../middlewares/validate-jwt');
 const { validateAdminRole } = require('../middlewares/validate-admin-role');
+
+const router = Router();
 
 router.get('/', getClothes);
 
@@ -18,7 +16,7 @@ router.post(
     '/',
     validateJWT,
     validateAdminRole,
-    upload.single('image'),
+    // upload.any(),
     [
         
         check('name', 'Name is required').not().isEmpty(),
@@ -36,7 +34,6 @@ router.put(
     '/:id',
     validateJWT,
     validateAdminRole,
-    upload.single('image'),
     [
         check('id', 'Invalid ID format').isMongoId(),
         validationfields

@@ -1,7 +1,7 @@
-import { ProductForm } from '../components/ProductForm';
+import { AdminPanelPage } from '../index'
 
 export const ProductHandler = () => {
   return (
-    <ProductForm />
+    <AdminPanelPage />
   )
 }

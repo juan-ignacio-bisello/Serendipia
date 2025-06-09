@@ -31,9 +31,10 @@ const ClothesSchema = Schema({
         enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL'], // tamaños predefinidos
         trim: true
     },
-    image: {
-        type: String
-    },
+    images: [{
+        url: String,
+        public_id: String,
+    }],
     stock: {
         type: Number,
         required: [true, 'Stock is required'],

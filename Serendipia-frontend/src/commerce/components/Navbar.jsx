@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartWidget } from './CartWidget';
 import { Logo } from './Logo';
@@ -14,9 +13,6 @@ export const Navbar = () => {
   const handleHome = () => {
     navigate('/');
   };
-  const handleLogin = () => {
-    navigate('/auth/login');
-  };
 
   const handleRegister = () => {
     navigate('/auth/register');
@@ -27,7 +23,7 @@ export const Navbar = () => {
     // If authenticated, navigate to the admin page
       
       if ( status === 'authenticated' && role === 'authenticated-ADMIN' ) {
-          return navigate('/product/add/*');
+          return navigate('/product/admin');
         } else {
           // If not authenticated as ADMIN, redirect to home
           console.log('No tienes permisos de administrador');
@@ -81,16 +77,11 @@ export const Navbar = () => {
               <div className='flex-1 flex justify-end sm:ml-4 items-center gap-x-4'>
                 <button 
                   className='px-4 py-2'
-                  onClick={ handleLogin }
-                >
-                  Login
-                </button>
-
-                <button 
-                  className='px-4 py-2'
                   onClick={ handleRegister }
                 >
-                  Signin
+                  <span className="material-symbols-outlined">
+                    account_circle
+                  </span>
                 </button>
               </div>
             )
@@ -103,7 +94,9 @@ export const Navbar = () => {
                   }
                 }
               >
-                Logout
+                <span className="material-symbols-outlined">
+                  logout
+                </span>
               </button>
             )
           }

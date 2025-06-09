@@ -17,7 +17,7 @@ export const useAuthStore = () => {
       
       // API call to login
       const { data } = await serendipiaApi.post('/auth', { email, password });
-      console.log(data);
+      
       localStorage.setItem( 'token', data.token );
       localStorage.setItem( 'token-init-date', new Date().getTime() );
 

@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { HomePage, Navbar, ProductHandler } from '../commerce';
+import { AdminRoutes, HomePage, Navbar } from '../commerce';
 import { AuthRoutes } from '../auth';
 import { AnimatePresence } from 'framer-motion';
 import { PrivateRoute } from './PrivateRoute';
@@ -16,8 +16,10 @@ export const AppRouter = () => {
     }, []);
 
     return (
-        <AnimatePresence mode='wait'>
+        <>
             <Navbar />
+
+            <AnimatePresence mode='wait'>
             <Routes location={ location } key={ location.pathname }>
                 {/* RUTAS PUBLICAS */}
                 <Route path="/auth/*" element={<AuthRoutes />} />
@@ -25,15 +27,15 @@ export const AppRouter = () => {
 
                 {/* RUTA PRIVADA */}
                 <Route 
-                    path='/product/add/*' 
+                    path='/product/admin/*' 
                     element={ 
                         <PrivateRoute>
-                            <ProductHandler />
+                            <AdminRoutes />
                         </PrivateRoute> } 
                 />
 
             </Routes>
         </AnimatePresence>
-        
+        </>
     );
 }

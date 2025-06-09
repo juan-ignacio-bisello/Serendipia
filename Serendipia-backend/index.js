@@ -1,7 +1,8 @@
 const express = require('express');
-const path = require('path');
 require('dotenv').config(); 
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
+
 // BD
 const { dbConnection } = require('./DB/config');
 
@@ -15,8 +16,14 @@ dbConnection();
 // CORS
 app.use(cors());
 
-// Servir la carpeta 'uploads' de forma estática
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// middleware global
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: '/tmp/',
+  createParentPath: true,
+}));
+
 
 // Directorio publico
 app.use( express.static('public') );

@@ -15,7 +15,7 @@ export const useProductStore = () => {
             // API call to get products
             const response = await serendipiaApi.get('/clothes');
             const products = response.data.clothes;
-            console.log(products);
+            
             dispatch( setProducts( products ) );
 
         } catch (error) {

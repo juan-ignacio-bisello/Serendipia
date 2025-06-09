@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { uploadImage } from '../../helpers';
 import { useNavigate } from 'react-router-dom';
+import serendipiaApi from '../../api/SerendipaApi';
+import Swal from 'sweetalert2';
 
 export const ProductForm = () => {
 
   const navigate = useNavigate();
 
+    const [imageFile, setImageFile] = useState( null );
     const [formValues, setFormValues] = useState({
         name: '',
         description: '',
@@ -15,7 +17,6 @@ export const ProductForm = () => {
         category: ''
       });
 
-    const [imageFile, setImageFile] = useState( null );
 
     const handleChange = ({ target }) => {
       if (target.type === 'file') {
@@ -33,29 +34,31 @@ export const ProductForm = () => {
       event.preventDefault();
     
       try {
-        let imageUrl = formValues.imageUrl;
-    
+        // Crear un objeto FormData para enviar los datos del formulario
+        const formData = new FormData();
+
+        formData.append('name', formValues.name);
+        formData.append('description', formValues.description);
+        formData.append('price', formValues.price);
+        formData.append('stock', formValues.stock);
+        formData.append('category', formValues.category);
+        formData.append('size', 'L'); // o cualquier valor fijo o input
         if (imageFile) {
-          imageUrl = await uploadImage(imageFile);
+          formData.append('image', imageFile);
         }
-    
-        const productData = {
-          ...formValues,
-          price: Number(formValues.price),
-          stock: Number(formValues.stock),
-          imageUrl,
-        };
-    
-        try {
-          // Guardar en colección general de productos
-          await addDoc(collection(FirebaseBD, `${productData.category}`), productData);
-          console.log(`Producto ${productData.name} subido con éxito`);
-        } catch (error) {
-          console.error('Error subiendo producto:', error.message);
-        }
-    
-        alert('Producto subido con éxito');
-    
+      
+
+        const response = await serendipiaApi.post('/clothes', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${localStorage.getItem('token')}`, // si usás JWT
+          },
+        });
+      
+        console.log('Producto subido:', response.data);
+      
+        Swal.fire( 'Éxito', 'Producto subido correctamente', 'success' );
+
         setFormValues({
           name: '',
           description: '',
@@ -67,7 +70,7 @@ export const ProductForm = () => {
         setImageFile(null);
       } catch (error) {
         console.error('Error al subir el producto', error);
-        alert('Error al subir el producto');
+        Swal.fire( 'Error', 'No se pudo subir el producto', 'error' );
       }
     };
 
@@ -89,7 +92,7 @@ export const ProductForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit} className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-xl shadow-Pink mt-10 space-y-4">
-        <h2 className="text-2xl font-semibold mb-4 text-White">Nuevo Producto</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-White">Agregar un nuevo Producto</h2>
 
         <input
           type="text"
@@ -124,7 +127,8 @@ export const ProductForm = () => {
           <input
           type="file"
           name="imageFile"
-          placeholder="URL de la imagen"
+          placeholder="URL de imagenes"
+          multiple
           className="w-1/2 border p-2 rounded text-Gray"
           onChange={handleChange}
         />
@@ -132,7 +136,7 @@ export const ProductForm = () => {
         <input
           type="url"
           name="imageUrl"
-          placeholder="URL de la imagen"
+          placeholder="URL de imagenes"
           className="w-1/2 border p-2 rounded text-Gray"
           value={formValues.imageUrl}
           onChange={handleChange}
@@ -158,21 +162,11 @@ export const ProductForm = () => {
           onChange={handleChange}
           required
         >
-          <option value="" disabled selected>Categoría</option>
+          <option value="" disabled >Categoría</option>
           <option value="Pantalones">Pantalones</option>
           <option value="Remeras">Remeras</option>
           <option value="Buzos">Buzos</option>
         </select>
-
-        {/* <input
-          type="text"
-          name="category"
-          placeholder="Categoría"
-          className="w-full border p-2 rounded text-Gray"
-          value={formValues.category}
-          onChange={handleChange}
-          required
-        /> */}
 
         <button
           type="submit"
