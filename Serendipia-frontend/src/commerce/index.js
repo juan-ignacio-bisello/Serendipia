@@ -11,4 +11,5 @@ export * from './components/Carousel';
 export * from './components/ProductForm';
 export * from './components/ProductList';
 export * from './components/ProductEdit';
+export * from './components/ProductCategoryPage';
 export * from './routes/AdminRoutes';

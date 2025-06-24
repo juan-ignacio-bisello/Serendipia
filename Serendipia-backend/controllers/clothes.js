@@ -1,10 +1,8 @@
-
 // Controlador para manejar las operaciones relacionadas con la ropa
 // Este controlador se encarga de las operaciones CRUD para la ropaconst { response } = require("express");
 
 const { response } = require('express');
 const Clothes = require('../models/ClothesModel');
-const { cloudinariUploadImage } = require('../helpers/cloudinariUploadImage');
 
 
 
@@ -22,6 +20,59 @@ const getClothes = async (req, res = response) => {
             error: error.message || 'Error inesperado'
         });
     }
+}
+
+const getClotheById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    if (!id || id.length !== 24) {
+      return res.status(400).json({ msg: 'ID inválido' });
+    }
+
+    const clothes = await Clothes.findById(id);
+
+    if (!clothes) {
+      return res.status(404).json({ msg: 'Producto no encontrado' });
+    }
+
+    res.status(200).json(clothes);
+
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      msg: 'Error al obtener la ropa',
+      error: error.message || 'Error inesperado'
+    });
+  }
+};
+
+const getClothesByCategory = async (req, res = response) => {
+
+  const { category } = req.params;
+
+  try {
+    
+    const clothes = await Clothes.find({ category });
+
+    if (clothes.length === 0) {
+      return res.status(404).json({
+        ok: false,
+        msg: 'No se encontraron productos en esta categoría'
+      });
+    }
+    res.status(200).json({
+      ok: true,
+      clothes
+    });
+    
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      msg: 'Error al obtener la ropa',
+      error: error.message || 'Error inesperado'
+    });
+  }
 }
 
 const createClothes = async (req, res = response) => {
@@ -170,6 +221,8 @@ const deleteClothes = async (req, res = response) => {
 module.exports = {
     getClothes,
     createClothes,
+    getClotheById,
+    getClothesByCategory,
     updateClothes,
     deleteClothes 
 };

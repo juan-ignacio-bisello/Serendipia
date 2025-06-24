@@ -3,7 +3,7 @@
 
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getClothes, createClothes, updateClothes, deleteClothes } = require('../controllers/clothes');
+const { getClothes, createClothes, updateClothes, deleteClothes, getClothesByCategory, getClotheById } = require('../controllers/clothes');
 const { validationfields } = require('../middlewares/field-validator');
 const { validateJWT } = require('../middlewares/validate-jwt');
 const { validateAdminRole } = require('../middlewares/validate-admin-role');
@@ -11,6 +11,27 @@ const { validateAdminRole } = require('../middlewares/validate-admin-role');
 const router = Router();
 
 router.get('/', getClothes);
+
+router.get(
+    '/category/:category',
+    [
+        check('category', 'Category is required').not().isEmpty(),
+        validationfields
+    ],
+    (req, res) => {
+        const { category } = req.params;
+        getClothesByCategory(req, res, category);
+    }
+);
+
+router.get(
+    '/clothes/:id', 
+    [
+        check('id', 'Invalid ID format').isMongoId(),
+        validationfields
+    ],
+    getClotheById
+);
 
 router.post(
     '/',

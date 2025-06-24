@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useProductStore } from '../../hooks/useProductStore';
 import { useNavigate } from 'react-router-dom';
+import { useProductStore } from '../../hooks';
 
 export const ProductList = () => {
   
@@ -21,6 +21,7 @@ export const ProductList = () => {
   }
 
   const handleEdit = (id) => {
+    console.log( id );
     navigate(`/product/admin/edit/${id}`);
   };
 

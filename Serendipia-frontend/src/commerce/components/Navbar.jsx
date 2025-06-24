@@ -34,43 +34,35 @@ export const Navbar = () => {
     
   }
 
-  const handlerBuzos = () => {
-    navigate('/product/buzos/*');
-  }
-
-  const handlerRemeras = () => {
-    navigate('/product/remeras/*');
-  }
-
-  const handlerPantalones = () => {
-    navigate('/product/pantalones/*');
+  const handlerFilter = ( category ) => {
+    navigate(`/product/${ category }/*`);
   }
   
   return (
-    <div className='flex items-center justify-between  py-4 px-5'>
-      <div className='flex flex-1 min-w-fit'>
+    <div className='flex items-center justify-between py-2 px-6 bg-white'>
+      <div className='flex items-center flex-none'>
         <Logo />
       </div>
 
-      <div className='flex items-center justify-between w-full py-4 px-5'>
-        <div className='flex-1 flex justify-center gap-x-4'>
-          <button className='px-4 py-2' onClick={ handleHome }>Home</button>
-          <button className='px-4 py-2' onClick={ handlerBuzos }>Buzos</button>
-          <button className='px-4 py-2' onClick={ handlerRemeras }>Remeras</button>
-          <button className='px-4 py-2' onClick={ handlerPantalones }>Pantalones</button>
-        </div>
-        
+      <div className='flex-1 flex justify-center gap-x-6'>
+        <button className='px-4 py-2' onClick={ handleHome }>Home</button>
+        <button className='px-4 py-2' onClick={ () => handlerFilter('buzos') }>Buzos</button>
+        <button className='px-4 py-2' onClick={ () => handlerFilter('remeras') }>Remeras</button>
+        <button className='px-4 py-2' onClick={ () => handlerFilter('pantalones') }>Pantalones</button>
+      </div>
+      
+      <div className='flex items-center gap-x-4'>  
         {
           status === 'authenticated' && role === 'authenticated-ADMIN' && (
           <div className='flex-1 flex justify-center sm:ml-4 items-center gap-x-4'>
-            <button className='px-4 py-2 ' onClick={handlerAdmin}>
+            <button className='px-4 py-2 ' onClick={ handlerAdmin }>
               ADMIN
             </button>
           </div>
         )}
         
 
-        <div className='flex-1 flex justify-end sm:ml-4 items-center gap-x-4'>
+        <div className='flex-1 flex justify-end items-center gap-x-4'>
           {
             ( status !== 'authenticated' )
             ? (
@@ -79,7 +71,7 @@ export const Navbar = () => {
                   className='px-4 py-2'
                   onClick={ handleRegister }
                 >
-                  <span className="material-symbols-outlined">
+                  <span className="material-symbols-outlined flex-1 flex justify-center items-center">
                     account_circle
                   </span>
                 </button>
@@ -94,7 +86,7 @@ export const Navbar = () => {
                   }
                 }
               >
-                <span className="material-symbols-outlined">
+                <span className="material-symbols-outlined flex-1 flex justify-center items-center">
                   logout
                 </span>
               </button>

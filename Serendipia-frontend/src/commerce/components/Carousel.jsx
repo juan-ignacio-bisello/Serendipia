@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { useProductStore } from '../../hooks/useProductStore';
 import { useDispatch } from 'react-redux';
 import { increment } from '../../store';
+import { useProductStore } from '../../hooks';
 
 export const Carousel = () => {
   const { clothes, startLoadingProducts } = useProductStore();
@@ -24,11 +24,11 @@ export const Carousel = () => {
   }
 
   return (
-    <div className="overflow-x-auto whitespace-nowrap space-x-4 flex px-4 py-6">
+    <div className="overflow-x-auto whitespace-nowrap space-x-4 flex justify-center px-4 py-6 ">
       {clothes.map((product, index) => (
         <div
           key={product._id || index}
-          className="inline-block w-64 bg-white rounded-xl shadow-lg p-4 flex-shrink-0"
+          className="inline-block w-64 bg-white rounded-xl p-4 flex-shrink-0 shadow-lg shadow-Pink"
         >
           <img
             src={product.image || `https://via.placeholder.com/250x150?text=Producto+${index + 1}`}

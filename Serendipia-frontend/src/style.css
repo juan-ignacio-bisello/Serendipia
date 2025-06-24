@@ -27,16 +27,16 @@ Colores de estado (para e-commerce):
 */
 
 /* src/fonts.css */
-@font-face {
+/* @font-face {
   font-family: 'October';
   src: url('./fonts/OCTOBER.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   color: #bfbfbf;
-}
+} */
 
 body {
-  font-family: 'October', sans-serif;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
   background-color: #1e1e1e;
 }
 
