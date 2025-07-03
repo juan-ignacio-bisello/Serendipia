@@ -43,8 +43,9 @@ export const ProductForm = () => {
         formData.append('stock', formValues.stock);
         formData.append('category', formValues.category);
         formData.append('size', 'L');
-        imageFiles.forEach((file) => {
-          formData.append('images', file); // 'images' debe coincidir con el campo que espera el backend
+
+        imageFiles.forEach( ( file ) => {
+          formData.append('images', file);
         });
       
 
@@ -59,15 +60,18 @@ export const ProductForm = () => {
       
         Swal.fire( 'Éxito', 'Producto subido correctamente', 'success' );
 
-        setFormValues({
-          name: '',
-          description: '',
-          price: '',
-          stock: '',
-          category: '',
-          imageUrl: '',
-        });
-        setImageFiles([]);
+        // setFormValues({
+        //   name: '',
+        //   description: '',
+        //   price: '',
+        //   stock: '',
+        //   category: '',
+        //   imageUrl: '',
+        // });
+        // setImageFiles([]);
+
+        navigate('/product/admin');
+
       } catch (error) {
         console.error('Error al subir el producto', error);
         Swal.fire( 'Error', 'No se pudo subir el producto', 'error' );

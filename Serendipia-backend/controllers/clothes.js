@@ -3,6 +3,7 @@
 
 const { response } = require('express');
 const Clothes = require('../models/ClothesModel');
+const { cloudinariUploadImage } = require('../helpers/cloudinariUploadImage');
 
 
 
@@ -58,7 +59,7 @@ const getClothesByCategory = async (req, res = response) => {
     if (clothes.length === 0) {
       return res.status(404).json({
         ok: false,
-        msg: 'No se encontraron productos en esta categoría'
+        msg: `No se encontraron productos en categoria: ${ category }`
       });
     }
     res.status(200).json({
@@ -76,27 +77,24 @@ const getClothesByCategory = async (req, res = response) => {
 }
 
 const createClothes = async (req, res = response) => {
-  const images = [];
-
+  
   try {
     const { name, description, price, stock, category, size } = req.body;
 
-    if (req.files && req.files.length > 0) {
-      for (const file of req.files) {
-        const result = await cloudinary.uploader.upload(file.tempFilePath, {
-          folder: 'serendipia',
-        });
+    const images = [];
+    const files = req.files?.images;
 
-        images.push({
-          url: result.secure_url,
-          public_id: result.public_id
-        });
+    if ( files ) {
 
-        fs.unlinkSync(file.tempFilePath);
+      const filesArray = Array.isArray( files ) ? files : [ files ];
+      
+      for ( const file of filesArray ) {
+        const imageData = await cloudinariUploadImage( file );
+        images.push( imageData );
       }
     }
 
-    if (images.length === 0) {
+    if ( images.length === 0 ) {
       return res.status(400).json({
         ok: false,
         msg: 'Debe subir al menos una imagen'
@@ -121,7 +119,10 @@ const createClothes = async (req, res = response) => {
       clothes: newClothes
     });
   } catch (error) {
-    res.status(500).json({
+
+    console.log('Error en createClothes: ', error.message );
+
+    return res.status(500).json({
       ok: false,
       msg: 'Error al crear la ropa',
       error: error.message || 'Error inesperado'

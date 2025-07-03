@@ -20,8 +20,6 @@ export const ProductEdit = () => {
 
   // Cargar el producto al iniciar el componente
   useEffect(() => {
-
-    console.log( id );
     
     const fetchProduct = async () => {
       try {
@@ -84,7 +82,7 @@ export const ProductEdit = () => {
       });
 
       Swal.fire('Éxito', 'Producto actualizado correctamente', 'success');
-      navigate('/admin/products');
+      navigate('/product/admin');
     } catch (error) {
       console.error('Error al actualizar el producto', error);
       Swal.fire('Error', 'No se pudo actualizar el producto', 'error');

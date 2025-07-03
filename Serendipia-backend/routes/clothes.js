@@ -18,14 +18,11 @@ router.get(
         check('category', 'Category is required').not().isEmpty(),
         validationfields
     ],
-    (req, res) => {
-        const { category } = req.params;
-        getClothesByCategory(req, res, category);
-    }
+    getClothesByCategory
 );
 
 router.get(
-    '/clothes/:id', 
+    '/:id', 
     [
         check('id', 'Invalid ID format').isMongoId(),
         validationfields
@@ -37,7 +34,6 @@ router.post(
     '/',
     validateJWT,
     validateAdminRole,
-    // upload.any(),
     [
         
         check('name', 'Name is required').not().isEmpty(),

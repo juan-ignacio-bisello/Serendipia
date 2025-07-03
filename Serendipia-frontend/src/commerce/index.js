@@ -4,6 +4,7 @@ export * from './page/ProductHandler';
 export * from './page/AdminPanelPage';
 export * from './components/CartWidget';
 export * from './components/AlsoListItem';
+export * from './components/GridList';
 export * from './components/Logo';
 export * from './components/Navbar';
 export * from './components/Banner';
