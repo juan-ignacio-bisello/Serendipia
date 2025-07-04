@@ -127,19 +127,21 @@ export const RegisterPage = () => {
                   Google
                 </button> */}
                 <div className="flex mt-16">
-                  <button 
-                    className="flex px-4 py-2 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink"
-                    onClick={ handleHome }
-                  >
-                    Home
-                  </button>
-                  <button 
-                    className="flex px-4 py-2 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink"
-                    onClick={ handleLogin }
-                  >
-                    Login
-                  </button>
                 </div>
+
+                <button 
+                  className="flex px-4 py-2 mb-4 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink"
+                  onClick={ handleLogin }
+                >
+                  Login
+                </button>
+
+                <button 
+                  className="flex px-4 py-2 mt-4 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink"
+                  onClick={ handleHome }
+                >
+                  Home
+                </button>
               </div>
             </div>
         </div>

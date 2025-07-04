@@ -7,7 +7,7 @@ export const ProductForm = () => {
 
   const navigate = useNavigate();
 
-    const [imageFile, setImageFile] = useState( null );
+    const [imageFiles, setImageFiles] = useState( null );
     const [formValues, setFormValues] = useState({
         name: '',
         description: '',
@@ -20,7 +20,7 @@ export const ProductForm = () => {
 
     const handleChange = ({ target }) => {
       if (target.type === 'file') {
-        setImageFile(target.files[0]);
+        setImageFiles( Array.from(target.files) );
       } else {
         setFormValues({
           ...formValues,
@@ -42,10 +42,11 @@ export const ProductForm = () => {
         formData.append('price', formValues.price);
         formData.append('stock', formValues.stock);
         formData.append('category', formValues.category);
-        formData.append('size', 'L'); // o cualquier valor fijo o input
-        if (imageFile) {
-          formData.append('image', imageFile);
-        }
+        formData.append('size', 'L');
+
+        imageFiles.forEach( ( file ) => {
+          formData.append('images', file);
+        });
       
 
         const response = await serendipiaApi.post('/clothes', formData, {
@@ -59,15 +60,18 @@ export const ProductForm = () => {
       
         Swal.fire( 'Éxito', 'Producto subido correctamente', 'success' );
 
-        setFormValues({
-          name: '',
-          description: '',
-          price: '',
-          stock: '',
-          category: '',
-          imageUrl: '',
-        });
-        setImageFile(null);
+        // setFormValues({
+        //   name: '',
+        //   description: '',
+        //   price: '',
+        //   stock: '',
+        //   category: '',
+        //   imageUrl: '',
+        // });
+        // setImageFiles([]);
+
+        navigate('/product/admin');
+
       } catch (error) {
         console.error('Error al subir el producto', error);
         Swal.fire( 'Error', 'No se pudo subir el producto', 'error' );
@@ -81,7 +85,7 @@ export const ProductForm = () => {
         formValues.price &&
         formValues.stock &&
         formValues.category &&
-        (imageFile || formValues.imageUrl)
+        (imageFiles || formValues.imageUrl)
       );
     };
 
@@ -126,8 +130,7 @@ export const ProductForm = () => {
         <div className='flex justify-around gap-4'>
           <input
           type="file"
-          name="imageFile"
-          placeholder="URL de imagenes"
+          name="images"
           multiple
           className="w-1/2 border p-2 rounded text-Gray"
           onChange={handleChange}

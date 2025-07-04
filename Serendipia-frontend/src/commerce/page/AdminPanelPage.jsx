@@ -9,10 +9,17 @@ export const AdminPanelPage = () => {
       <h1 className="text-2xl font-bold mb-4">Panel de Administración</h1>
 
       <div className="flex gap-4 mb-6">
-        <button onClick={() => navigate('add')} className="btn">Agregar</button>
-        <button onClick={() => navigate('list')} className="btn">Listar</button>
-        <button onClick={() => navigate('edit/:id')} className="btn">Actualizar</button>
+        <button className="btn flex w-24 h-8 items-center justify-center" onClick={() => navigate('add')} >Agregar</button>
       </div>
+      
+      <h2 className="text-xl font-bold mb-4" >Filtros: </h2>
+      <div className="flex gap-4 mb-6">
+        <button className="btn flex w-24 h-8 items-center justify-center" >Buzos</button>
+        <button className="btn flex w-24 h-8 items-center justify-center" >Remeras</button>
+        <button className="btn flex w-24 h-8 items-center justify-center" >Pantalones</button>
+      </div>
+        
+      
 
       <div>
         <ProductList />

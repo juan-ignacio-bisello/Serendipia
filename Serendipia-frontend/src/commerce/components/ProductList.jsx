@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { useProductStore } from '../../hooks/useProductStore';
 import { useNavigate } from 'react-router-dom';
+import { useProductStore } from '../../hooks';
+import { useState } from 'react';
 
 export const ProductList = () => {
   
@@ -8,9 +9,11 @@ export const ProductList = () => {
   const { clothes, startLoadingProducts, startDeletingProduct } = useProductStore();
   const navigate = useNavigate();
 
+  const [ refresh, setRefresh ] = useState(false);
+
   useEffect(() => {
     startLoadingProducts();
-  }, []);
+  }, [refresh]);
 
   if (!Array.isArray(clothes)) {
     return <div>Error: los productos no son válidos</div>;
@@ -24,9 +27,14 @@ export const ProductList = () => {
     navigate(`/product/admin/edit/${id}`);
   };
 
-  const handleDelete = (id) => {
-    startDeletingProduct(id);
+  const handleDelete = async(id) => {
+    await startDeletingProduct(id);
+    setRefresh( prev => !prev );
   };
+
+  const handleDetails = ( id ) => {
+    console.log('handleDetails');
+  }
 
   return (
     <div className="p-4">
@@ -47,7 +55,7 @@ export const ProductList = () => {
               <tr key={product._id} className="border-t hover:bg-gray-50">
                 <td className="px-4 py-2">
                   <img
-                    src={product.image || `https://via.placeholder.com/250x150?text=Producto+${index + 1}`}
+                    src={product.images?.[0]?.url || `https://via.placeholder.com/250x150?text=Producto+${index + 1}`}
                     alt={product.name}
                     className="w-16 h-16 object-cover rounded"
                   />
@@ -58,15 +66,21 @@ export const ProductList = () => {
                 <td className="px-4 py-2 space-x-2">
                   <button
                     onClick={() => handleEdit(product._id)}
-                    className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                    className="bg-blue-500 min-w-20 text-white px-3 py-1 rounded hover:bg-blue-600"
                   >
                     Editar
                   </button>
                   <button
                     onClick={() => handleDelete(product._id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                    className="bg-red-500 min-w-20 text-white px-3 py-1 rounded hover:bg-red-600"
                   >
                     Eliminar
+                  </button>
+                  <button
+                    onClick={() => handleDetails(product._id)}
+                    className="bg-red-500 min-w-20 text-white px-3 py-1 rounded hover:bg-red-600"
+                  >
+                    VER
                   </button>
                 </td>
               </tr>

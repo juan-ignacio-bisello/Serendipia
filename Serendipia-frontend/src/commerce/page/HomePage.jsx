@@ -1,4 +1,4 @@
-import { Carousel } from '../';
+import { Carousel, GridList } from '../';
 
 
 
@@ -8,7 +8,8 @@ export const HomePage = () => {
   
   return (
   <>
-      <Carousel />
+    <GridList />
+    {/* <Carousel /> */}
   </>
   )
 }

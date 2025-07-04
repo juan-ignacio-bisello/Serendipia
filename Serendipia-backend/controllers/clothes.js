@@ -1,4 +1,3 @@
-
 // Controlador para manejar las operaciones relacionadas con la ropa
 // Este controlador se encarga de las operaciones CRUD para la ropaconst { response } = require("express");
 
@@ -24,28 +23,78 @@ const getClothes = async (req, res = response) => {
     }
 }
 
-const createClothes = async (req, res = response) => {
-  const images = [];
+const getClotheById = async (req, res) => {
+  const { id } = req.params;
 
+  try {
+    if (!id || id.length !== 24) {
+      return res.status(400).json({ msg: 'ID inválido' });
+    }
+
+    const clothes = await Clothes.findById(id);
+
+    if (!clothes) {
+      return res.status(404).json({ msg: 'Producto no encontrado' });
+    }
+
+    res.status(200).json(clothes);
+
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      msg: 'Error al obtener la ropa',
+      error: error.message || 'Error inesperado'
+    });
+  }
+};
+
+const getClothesByCategory = async (req, res = response) => {
+
+  const { category } = req.params;
+
+  try {
+    
+    const clothes = await Clothes.find({ category });
+
+    if (clothes.length === 0) {
+      return res.status(404).json({
+        ok: false,
+        msg: `No se encontraron productos en categoria: ${ category }`
+      });
+    }
+    res.status(200).json({
+      ok: true,
+      clothes
+    });
+    
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      msg: 'Error al obtener la ropa',
+      error: error.message || 'Error inesperado'
+    });
+  }
+}
+
+const createClothes = async (req, res = response) => {
+  
   try {
     const { name, description, price, stock, category, size } = req.body;
 
-    if (req.files && req.files.length > 0) {
-      for (const file of req.files) {
-        const result = await cloudinary.uploader.upload(file.tempFilePath, {
-          folder: 'serendipia',
-        });
+    const images = [];
+    const files = req.files?.images;
 
-        images.push({
-          url: result.secure_url,
-          public_id: result.public_id
-        });
+    if ( files ) {
 
-        fs.unlinkSync(file.tempFilePath);
+      const filesArray = Array.isArray( files ) ? files : [ files ];
+      
+      for ( const file of filesArray ) {
+        const imageData = await cloudinariUploadImage( file );
+        images.push( imageData );
       }
     }
 
-    if (images.length === 0) {
+    if ( images.length === 0 ) {
       return res.status(400).json({
         ok: false,
         msg: 'Debe subir al menos una imagen'
@@ -70,7 +119,10 @@ const createClothes = async (req, res = response) => {
       clothes: newClothes
     });
   } catch (error) {
-    res.status(500).json({
+
+    console.log('Error en createClothes: ', error.message );
+
+    return res.status(500).json({
       ok: false,
       msg: 'Error al crear la ropa',
       error: error.message || 'Error inesperado'
@@ -170,6 +222,8 @@ const deleteClothes = async (req, res = response) => {
 module.exports = {
     getClothes,
     createClothes,
+    getClotheById,
+    getClothesByCategory,
     updateClothes,
     deleteClothes 
 };
