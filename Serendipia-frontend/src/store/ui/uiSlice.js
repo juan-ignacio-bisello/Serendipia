@@ -6,14 +6,18 @@ export const uiSlice = createSlice({
         isItemModalOpen: false,
         isCartWidgetEmpty: true,
         isActiveEvent: false,
+        selectedProduct: null,
         counter: 0
     },
     reducers: {
-        onItemModalOpen: ( state ) => {
-            state.isItemModalOpen = true;
+        onItemModalHandler: ( state ) => {
+            state.isItemModalOpen = !state.isItemModalOpen;
         },
-        onItemModalClose: ( state ) => {
-            state.isItemModalOpen = false;
+        setSelectedProduct: ( state, { payload } ) => {
+            state.selectedProduct = payload;
+        },
+        clearSelectedProduct: ( state ) => {
+            state.selectedProduct = null;
         },
         increment: ( state ) => {
             state.counter += 1;
@@ -39,4 +43,4 @@ export const uiSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { onItemModalOpen, onItemModalClose, increment, decrement, reset } = uiSlice.actions;
+export const { onItemModalHandler, setSelectedProduct, clearSelectedProduct, increment, decrement, reset } = uiSlice.actions;

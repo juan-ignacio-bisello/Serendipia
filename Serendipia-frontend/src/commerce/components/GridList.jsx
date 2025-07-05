@@ -1,19 +1,26 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { increment } from '../../store';
-import { useProductStore } from '../../hooks';
+import { increment, setSelectedProduct } from '../../store';
+import { useProductStore, useUiStore } from '../../hooks';
 
 export const GridList = () => {
+
   const { clothes, startLoadingProducts } = useProductStore();
   const dispatch = useDispatch();
-
-  const onAddToCart = () => {
-      dispatch( increment() );
-    };
+  const { toggleItemModal } = useUiStore();
 
   useEffect(() => {
     startLoadingProducts();
   }, []);
+
+  const onAddToCart = () => {
+    dispatch( increment() );
+  };
+
+  const handlerSelectedProduct = ( product ) => {
+    dispatch( setSelectedProduct( product ) );
+    toggleItemModal();
+  }
 
   if (!Array.isArray(clothes)) {
     return <div>Error: los productos no son válidos</div>;
@@ -28,14 +35,15 @@ export const GridList = () => {
       { clothes.map((product, index) => (
         <div
           key={product._id || index}
-          className="inline-block w-64 min-h-96 bg-white rounded-xl p-4 flex-shrink-0 shadow-lg shadow-Pink"
+          className="inline-block w-64 min-h-96 bg-white rounded-xl p-4 flex-shrink-0 shadow-lg shadow-Pink justify-center items-center"
         >
           
           <img
-            className=' object-cover min-h-72'
+            className=' object-cover h-80 justify-center items-center '
             key={product._id || index}
             alt={ product.name || `Producto ${index + 1}` }
             src={ product.images?.[0]?.url || `https://via.placeholder.com/250x150?text=Producto+${index + 1}` }
+            onClick={ () => handlerSelectedProduct( product ) }
           />
           
 
