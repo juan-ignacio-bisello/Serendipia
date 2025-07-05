@@ -34,6 +34,7 @@ export const ProductList = () => {
 
   const handleDetails = ( id ) => {
     console.log('handleDetails');
+    console.log( id );
   }
 
   return (
@@ -52,7 +53,10 @@ export const ProductList = () => {
           </thead>
           <tbody>
             {clothes.map((product) => (
-              <tr key={product._id} className="border-t hover:bg-gray-50">
+              <tr 
+                key={product._id}  
+                className="border-t hover:bg-gray-50"
+              >
                 <td className="px-4 py-2">
                   <img
                     src={product.images?.[0]?.url || `https://via.placeholder.com/250x150?text=Producto+${index + 1}`}

@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { AdminRoutes, HomePage, Navbar, ProductCategoryPage } from '../commerce';
+import { AdminRoutes, HomePage, Navbar, ProductCategoryPage, ProductModal } from '../commerce';
 import { AuthRoutes } from '../auth';
 import { AnimatePresence } from 'framer-motion';
 import { PrivateRoute } from './PrivateRoute';
@@ -18,7 +18,7 @@ export const AppRouter = () => {
     return (
         <>
             <Navbar />
-
+            <ProductModal />
             <AnimatePresence mode='wait'>
             <Routes location={ location } key={ location.pathname }>
                 {/* RUTAS PUBLICAS */}

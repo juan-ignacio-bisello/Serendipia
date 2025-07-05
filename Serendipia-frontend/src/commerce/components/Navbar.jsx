@@ -35,7 +35,7 @@ export const Navbar = () => {
   }
 
   const handlerFilter = ( category ) => {
-    navigate(`/product/${ category }/*`);
+    navigate(`/clothes/category/${ category }/*`);
   }
   
   return (
