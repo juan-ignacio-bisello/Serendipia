@@ -3,7 +3,7 @@ import { onItemModalHandler, setSelectedProduct, clearSelectedProduct } from '..
 
 export const useUiStore = () => {
   
-  const { isCartWidgetEmpty, isActiveEvent, isItemModalOpen } = useSelector( state => state.ui );
+  const { isCartWidgetEmpty, isActiveEvent, isItemModalOpen, selectedProduct } = useSelector( state => state.ui );
   const dispatch = useDispatch();
   
   const handlerProductDetail = ( product ) => {
@@ -26,6 +26,7 @@ export const useUiStore = () => {
     ClearModal,
     isCartWidgetEmpty,
     isActiveEvent,
-    isItemModalOpen
+    isItemModalOpen,
+    selectedProduct
   }
 }
