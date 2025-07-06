@@ -12,6 +12,7 @@ export const ProductList = () => {
   const [ refresh, setRefresh ] = useState(false);
 
   useEffect(() => {
+    console.log('effect productList');
     startLoadingProducts();
   }, [refresh]);
 
@@ -32,10 +33,6 @@ export const ProductList = () => {
     setRefresh( prev => !prev );
   };
 
-  const handleDetails = ( id ) => {
-    console.log('handleDetails');
-    console.log( id );
-  }
 
   return (
     <div className="p-4">
@@ -79,12 +76,6 @@ export const ProductList = () => {
                     className="bg-red-500 min-w-20 text-white px-3 py-1 rounded hover:bg-red-600"
                   >
                     Eliminar
-                  </button>
-                  <button
-                    onClick={() => handleDetails(product._id)}
-                    className="bg-red-500 min-w-20 text-white px-3 py-1 rounded hover:bg-red-600"
-                  >
-                    VER
                   </button>
                 </td>
               </tr>

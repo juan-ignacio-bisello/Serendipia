@@ -1,18 +1,25 @@
 import { useNavigate } from 'react-router-dom';
 import { CartWidget } from './CartWidget';
 import { Logo } from './Logo';
-import { useAuthStore } from '../../hooks';
+import { useAuthStore, useProductStore } from '../../hooks';
 
 export const Navbar = () => {
 
   const navigate = useNavigate();
   
   const { status, user, startLogout } = useAuthStore();
+  const { startLoadingProducts, startLoadingProductsByCategory } = useProductStore();
   const role = user?.role;
 
   const handleHome = () => {
     navigate('/');
+    startLoadingProducts();
   };
+
+  const handlerFilter = ( category ) => {
+    handleHome();
+    startLoadingProductsByCategory( category );
+  }
 
   const handleRegister = () => {
     navigate('/auth/register');
@@ -33,10 +40,6 @@ export const Navbar = () => {
         }
     
   }
-
-  const handlerFilter = ( category ) => {
-    navigate(`/clothes/category/${ category }/*`);
-  }
   
   return (
     <div className='flex items-center justify-between py-2 px-6 bg-white'>
@@ -46,9 +49,9 @@ export const Navbar = () => {
 
       <div className='flex-1 flex justify-center gap-x-6'>
         <button className='px-4 py-2' onClick={ handleHome }>Home</button>
-        <button className='px-4 py-2' onClick={ () => handlerFilter('buzos') }>Buzos</button>
-        <button className='px-4 py-2' onClick={ () => handlerFilter('remeras') }>Remeras</button>
-        <button className='px-4 py-2' onClick={ () => handlerFilter('pantalones') }>Pantalones</button>
+        <button className='px-4 py-2' onClick={ () => handlerFilter('Buzos') }>Buzos</button>
+        <button className='px-4 py-2' onClick={ () => handlerFilter('Remeras') }>Remeras</button>
+        <button className='px-4 py-2' onClick={ () => handlerFilter('Pantalones') }>Pantalones</button>
       </div>
       
       <div className='flex items-center gap-x-4'>  
