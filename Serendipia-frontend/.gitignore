@@ -2,7 +2,7 @@
 node_modules/
 
 # Archivos de entorno
-.enV
+.env
 .env.local
 .env.development
 .env.test
