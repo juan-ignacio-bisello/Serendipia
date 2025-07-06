@@ -12,7 +12,6 @@ export const ProductList = () => {
   const [ refresh, setRefresh ] = useState(false);
 
   useEffect(() => {
-    console.log('effect productList');
     startLoadingProducts();
   }, [refresh]);
 
