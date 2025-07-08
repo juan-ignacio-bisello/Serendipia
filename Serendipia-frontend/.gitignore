@@ -42,7 +42,6 @@ dump/
 
 # Build
 dist/
-build/
-public/
+
 # Git merge conflict backups
 *.orig
