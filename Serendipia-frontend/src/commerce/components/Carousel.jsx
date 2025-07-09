@@ -4,24 +4,24 @@ import { increment } from '../../store';
 import { useProductStore } from '../../hooks';
 
 export const Carousel = () => {
-  const { clothes, startLoadingProducts } = useProductStore();
-  const dispatch = useDispatch();
+  // const { clothes, startLoadingProducts } = useProductStore();
+  // const dispatch = useDispatch();
 
-  const onAddToCart = () => {
-      dispatch( increment() );
-    };
+  // const onAddToCart = () => {
+  //     dispatch( increment() );
+  //   };
 
-  useEffect(() => {
-    startLoadingProducts();
-  }, []);
+  // useEffect(() => {
+  //   startLoadingProducts();
+  // }, []);
 
-  if (!Array.isArray(clothes)) {
-    return <div>Error: los productos no son válidos</div>;
-  }
+  // if (!Array.isArray(clothes)) {
+  //   return <div>Error: los productos no son válidos</div>;
+  // }
 
-  if (clothes.length === 0) {
-    return <div className="text-center py-6">Cargando productos...</div>;
-  }
+  // if (clothes.length === 0) {
+  //   return <div className="text-center py-6">Cargando productos...</div>;
+  // }
 
   return (
     <div className="overflow-x-auto  whitespace-nowrap space-x-4 flex justify-center px-4 py-6 ">

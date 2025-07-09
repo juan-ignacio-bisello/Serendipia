@@ -25,25 +25,25 @@ app.use(fileUpload({
   createParentPath: true,
 }));
 
+// Servir archivos estáticos del frontend
+app.use(express.static( 'public' ) );
+
 app.use( express.json() );
 app.use( express.urlencoded({ extended: true }) );
 
-// Rutas
-app.use( '/api/auth', require('./routes/auth') );
-app.use( '/api/clothes', require('./routes/clothes') );
+// Resto de rutas (API)
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/clothes', require('./routes/clothes'));
 
-// Directorio publico
-const frontendBuildPath = path.join(__dirname, 'client'); // Ruta absoluta a la carpeta 'client'
-app.use(express.static(frontendBuildPath));
-
+// Fallback a React (SPA)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(frontendBuildPath, 'index.html'));
+  res.sendFile(path.join( __dirname, 'public/index.html'));
 });
+
 
 
 // Escuchar peticiones
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`Servidor backend escuchando en http://localhost:${port}`);
-  console.log(`Sirviendo archivos estáticos del frontend desde: ${frontendBuildPath}`);
 });

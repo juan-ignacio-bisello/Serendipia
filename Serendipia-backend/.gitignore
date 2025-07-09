@@ -43,5 +43,3 @@ dump/
 
 # Git merge conflict backups
 *.orig
-
-public/

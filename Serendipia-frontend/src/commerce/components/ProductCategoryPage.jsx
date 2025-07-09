@@ -9,8 +9,9 @@ export const ProductCategoryPage = () => {
     const { clothes, startLoadingProductsByCategory } = useProductStore();
 
     useEffect(() => {
-      startLoadingProductsByCategory( category );
-    }, [ category ]);
+      startLoadingProductsByCategory(category);
+    }, [category, startLoadingProductsByCategory]);
+
     
     return (
       <div className="p-4">
@@ -18,7 +19,7 @@ export const ProductCategoryPage = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {clothes.map(product => (
             <div key={product._id} className="bg-white p-4 rounded shadow">
-              <img src={product.image} alt={product.name} className="w-full h-40 object-cover mb-2" />
+              <img src={product.images?.[0]?.url || 'fallback.png'} alt={product.name}  className="w-full h-40 object-cover mb-2" />
               <h3 className="text-lg font-semibold">{product.name}</h3>
               <p className="text-gray-600">${product.price}</p>
             </div>
