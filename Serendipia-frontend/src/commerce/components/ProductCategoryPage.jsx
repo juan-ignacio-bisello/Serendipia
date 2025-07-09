@@ -9,8 +9,9 @@ export const ProductCategoryPage = () => {
     const { clothes, startLoadingProductsByCategory } = useProductStore();
 
     useEffect(() => {
-      startLoadingProductsByCategory(category);
-    }, [category, startLoadingProductsByCategory]);
+      if ( category )
+        startLoadingProductsByCategory(category);
+    }, [category]);
 
     
     return (

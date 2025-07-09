@@ -48,7 +48,7 @@ export const GridList = () => {
           
 
           <h3 className="text-lg font-semibold">{product.name || `Producto ${index + 1}`}</h3>
-          <p className="text-gray-600">${product.price || `9${index}`}$</p>
+          <p className="text-gray-600">${product.price || `9${index}`}</p>
           <button 
             className="mt-2 w-full bg-lime-500 text-white py-2 rounded-md hover:bg-lime-600"
             onClick={ onAddToCart }  

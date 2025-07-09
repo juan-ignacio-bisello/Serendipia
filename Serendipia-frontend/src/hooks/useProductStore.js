@@ -23,6 +23,12 @@ export const useProductStore = () => {
 
 
     const startLoadingProductsByCategory = useCallback(async (category) => {
+
+        if ( !category ) {
+            console.log('Categoria vacia');
+            return;
+        }
+
         try {
             const response = await serendipiaApi.get(`/clothes/category/${category}`);
             const products = response.data.clothes;
