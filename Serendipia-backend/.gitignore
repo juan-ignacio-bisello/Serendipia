@@ -41,10 +41,5 @@ dump/
 *.local.db
 *.sqlite
 
-# Build
-dist/
-build/
-public/
-
 # Git merge conflict backups
 *.orig

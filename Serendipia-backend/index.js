@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config(); 
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
+const path = require('path');
 
 // BD
 const { dbConnection } = require('./DB/config');
@@ -24,20 +25,23 @@ app.use(fileUpload({
   createParentPath: true,
 }));
 
-
-// Directorio publico
-app.use( express.static('public') );
+// Servir archivos estáticos del frontend
+app.use(express.static( 'public' ) );
 
 app.use( express.json() );
 app.use( express.urlencoded({ extended: true }) );
 
-// Rutas
-app.use( '/api/auth', require('./routes/auth') );
+// Resto de rutas (API)
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/clothes', require('./routes/clothes'));
 
-app.use( '/api/clothes', require('./routes/clothes') );
-
+// Fallback a React (SPA)
+app.get('/*splat', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 // Escuchar peticiones
-app.listen( process.env.PORT, () => {
-    console.log(`Servidor en ${ process.env.PORT }`);
-})
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
+  console.log(`Servidor backend escuchando en http://localhost:${port}`);
+});

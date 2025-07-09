@@ -36,7 +36,7 @@ export const AppRouter = () => {
                 />
 
             </Routes>
-        </AnimatePresence>
+            </AnimatePresence>
         </>
     );
 }

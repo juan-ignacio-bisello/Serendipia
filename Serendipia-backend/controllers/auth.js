@@ -37,6 +37,7 @@ const createUser = async(req, res = response ) => {
         return res.status(201).json({
             ok: true,
             uid: user.id,
+            email: user.email,
             name: user.name,
             role: user.role,
             token
