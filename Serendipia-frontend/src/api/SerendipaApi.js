@@ -3,7 +3,7 @@ import axios from 'axios';
 const { VITE_API_URL } = import.meta.env;
 
 const serendipiaApi = axios.create({
-    baseURL: VITE_API_URL,
+    baseURL: VITE_API_URL + '/api',
 })
 
 // Interceptor para agregar el token de autenticación a las solicitudes
