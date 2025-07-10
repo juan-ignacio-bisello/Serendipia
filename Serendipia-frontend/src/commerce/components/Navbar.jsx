@@ -46,6 +46,7 @@ export const Navbar = () => {
     <div className='flex items-center justify-between py-2 px-6 bg-white'>
       <div className='flex items-center flex-none'>
         <Logo />
+        <h1 className='md:hidden items-center justify-center pt-1 font-bold text-xl'>Serendipia</h1>
       </div>
 
       <div className='hidden md:flex-1 md:flex justify-center items-center md:gap-x-6 gap-x-1'>
@@ -73,7 +74,7 @@ export const Navbar = () => {
               ? (
                 <div className='flex-1 flex justify-end ml-4 items-center md:gap-x-4'>
                   <button 
-                    className='h-8 w-8 md:px-4 md:py-2'
+                    className='md:h-10 md:w-10 hover:md:rounded-full rounded-full'
                     onClick={ handleRegister }
                   >
                     <span className="material-symbols-outlined flex-1 flex justify-center items-center">
@@ -84,7 +85,7 @@ export const Navbar = () => {
               )
               : (
                 <button
-                  className='h-8 w-8 md:px-4 md:py-2'
+                  className='md:h-10 md:w-10 hover:md:rounded-full rounded-full'
                   onClick={ () => {
                       startLogout();
                       navigate('/');
@@ -99,7 +100,9 @@ export const Navbar = () => {
             }
           </div>
           <CartWidget />
-          <SideBar />
+          <span className="md:hidden flex material-symbols-outlined text-White items-center justify-center pt-1 ml-4">
+            menu_open
+          </span>
         </div>
       </div>
       
