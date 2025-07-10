@@ -9,6 +9,7 @@ export * from './components/Logo';
 export * from './components/Navbar';
 export * from './components/Banner';
 export * from './components/Carousel';
+export * from './components/SideBar';
 export * from './components/ProductForm';
 export * from './components/ProductList';
 export * from './components/ProductEdit';
