@@ -55,7 +55,6 @@ export const useProductStore = () => {
         try {
             
             const del = await serendipiaApi.delete(`/clothes/${ id }`);
-            console.log( 'Eliminado: ', del );
 
             dispatch( startLoadingProducts() );
 
