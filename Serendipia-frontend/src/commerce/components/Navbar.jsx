@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { CartWidget } from './CartWidget';
 import { Logo } from './Logo';
-import { useAuthStore, useProductStore } from '../../hooks';
+import { useAuthStore, useProductStore, useUiStore } from '../../hooks';
 import { SideBar } from './SideBar';
 
 export const Navbar = () => {
@@ -10,8 +10,11 @@ export const Navbar = () => {
   
   const { status, user, startLogout } = useAuthStore();
   const { startLoadingProducts, startLoadingProductsByCategory } = useProductStore();
+  const { toggleSideBar } = useUiStore();
+
   const role = user?.role;
 
+  //TODO: HACER TODAS LAS FUNCIONES DE NAVEGACION ENTRE CATEGORTIAS Y HOME EN UN HOOK
   const handleHome = () => {
     navigate('/');
     startLoadingProducts();
@@ -100,8 +103,12 @@ export const Navbar = () => {
             }
           </div>
           <CartWidget />
-          <span className="md:hidden flex material-symbols-outlined text-White items-center justify-center pt-1 ml-4">
+          <span 
+            className="md:hidden flex material-symbols-outlined text-White items-center justify-center pt-1 ml-4"
+            onClick={ toggleSideBar }
+          >
             menu_open
+            <SideBar />
           </span>
         </div>
       </div>

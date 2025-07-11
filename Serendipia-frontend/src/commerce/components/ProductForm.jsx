@@ -60,16 +60,6 @@ export const ProductForm = () => {
       
         Swal.fire( 'Éxito', 'Producto subido correctamente', 'success' );
 
-        // setFormValues({
-        //   name: '',
-        //   description: '',
-        //   price: '',
-        //   stock: '',
-        //   category: '',
-        //   imageUrl: '',
-        // });
-        // setImageFiles([]);
-
         navigate('/product/admin');
 
       } catch (error) {
@@ -127,24 +117,14 @@ export const ProductForm = () => {
           required
         />
 
-        <div className='flex justify-around gap-4'>
-          <input
+        <input
           type="file"
           name="images"
           multiple
-          className="w-1/2 border p-2 rounded text-Gray"
+          className="w-full border p-2 rounded text-Gray"
           onChange={handleChange}
         />
 
-        <input
-          type="url"
-          name="imageUrl"
-          placeholder="URL de imagenes"
-          className="w-1/2 border p-2 rounded text-Gray"
-          value={formValues.imageUrl}
-          onChange={handleChange}
-        />
-        </div>
         
 
         <input

@@ -35,10 +35,10 @@ export const GridList = () => {
       { clothes.map((product, index) => (
         <div
           key={product._id || index}
-          className="inline-block md:max-xl:w-64 md:max-xl:min-h-96 bg-white rounded-xl p-4 flex-shrink-0 shadow-lg shadow-Pink justify-center items-center"
+          className="inline-block  sm:w-64 sm:min-h-96 bg-white rounded-xl p-4 flex-shrink-0 shadow-lg shadow-Pink justify-center items-center"
         >
           <img
-            className=' object-cover md:max-xl:h-80 justify-center items-center '
+            className=' object-cover h-52 w-40 sm:h-80 sm:w-56 justify-center items-center '
             key={product._id || index}
             alt={ product.name || `Producto ${index + 1}` }
             src={ product.images?.[0]?.url || `https://via.placeholder.com/250x150?text=Producto+${index + 1}` }

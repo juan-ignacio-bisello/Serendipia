@@ -21,6 +21,7 @@ export const useUiStore = () => {
   }
 
   const toggleSideBar = () => {
+    console.log('toggleSideBar')
     dispatch( onSideBarOpenHandler() );
   }
 
