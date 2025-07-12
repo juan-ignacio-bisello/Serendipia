@@ -2,12 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuthStore, useProductStore, useUiStore } from '../../hooks';
 
+
 export const SideBar = () => {
   const navigate = useNavigate();
 
   const { startLoadingProducts, startLoadingProductsByCategory } = useProductStore();
   const { toggleSideBar, isSideBarOpen } = useUiStore();
   const { status, startLogout } = useAuthStore();
+
 
   const handleHome = () => {
     navigate('/');
@@ -34,6 +36,7 @@ export const SideBar = () => {
                   e.stopPropagation();
                   toggleSideBar();
                 } }
+
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -42,6 +45,7 @@ export const SideBar = () => {
             {/* Sidebar */}
             <motion.div
                 className="fixed top-0 right-0 w-64 h-full bg-Black text-white z-50 p-4 shadow-lg shadow-White md:hidden"
+
                 initial={{ x: '100%' }}
                 animate={{ x: 0 }}
                 exit={{ x: '100%' }}
@@ -55,6 +59,7 @@ export const SideBar = () => {
                   }}
                   className="text-white text-3xl"
                 >
+
                   <span className="material-symbols-outlined  h-9 w-9">menu_open</span>
                 </button>
 
