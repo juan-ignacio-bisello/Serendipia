@@ -65,50 +65,50 @@ export const RegisterPage = () => {
           className="..."
       >
         <div className="flex size-2/3 place-content-center justify-self-center py-24">
-          <div className="table-row shadow-xl shadow-Gray justify-between p-28"> 
+          <div className="table-row w-80 shadow-xl shadow-Gray justify-center rounded-lg p-28"> 
             <h3 className="text-White text-2xl">Registro</h3>
             <form onSubmit={ onSubmit}>
-              <div className="mb-2">
+              <div className="flex justify-center my-3">
                 <input
                   type="text"
-                  className="text-gray-500"
-                  placeholder="Nombre"
+                  className="text-gray-500 rounded-sm"
+                  placeholder=" Nombre"
                   name="registerName"
                   value={registerName}
                   onChange={onInputChange}
                 />
               </div>
-              <div className="flex mb-2">
+              <div className="flex justify-center my-3">
                 <input
                   type="email"
-                  className="text-gray-500"
-                  placeholder="Correo"
+                  className="text-gray-500 rounded-sm"
+                  placeholder=" Correo"
                   name="registerEmail"
                   value={registerEmail}
                   onChange={onInputChange}
                 />
               </div>
-              <div className="flex mb-2">
+              <div className="flex justify-center my-3">
                 <input
                   type="password"
-                  className="text-gray-500"
-                  placeholder="Contraseña"
+                  className="text-gray-500 rounded-sm"
+                  placeholder=" Contraseña"
                   name="registerPassword"
                   value={registerPassword}
                   onChange={onInputChange}
                 />
               </div>
-              <div className="flex mb-2">
+              <div className="flex justify-center my-3">
                 <input
                   type="password"
-                  className="text-gray-500"
-                  placeholder="Repita la contraseña"
+                  className="text-gray-500 rounded-sm"
+                  placeholder=" Repita la contraseña"
                   name="registerPassword2"
                   value={registerPassword2}
                   onChange={onInputChange}
                 />
               </div>
-              <div className="flex mb-2">
+              <div className="flex justify-center my-3">
                 <button 
                   type="submit" 
                   className="flex px-4 py-2 w-full justify-center text-lg"
@@ -119,25 +119,17 @@ export const RegisterPage = () => {
 
             </form>
 
-              <div className="flex-row mt-3 justify-center pt-5">
-                {/* <button 
-                  className="flex px-4 py-2 w-full justify-center text-lg"
-                  onClick={ onGoogleSingin }
-                >
-                  Google
-                </button> */}
-                <div className="flex mt-16">
-                </div>
+              <div className="flex justify-center mt-16 gap-4">
 
                 <button 
-                  className="flex px-4 py-2 mb-4 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink"
+                  className="flex px-4 py-2 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink"
                   onClick={ handleLogin }
                 >
                   Login
                 </button>
 
                 <button 
-                  className="flex px-4 py-2 mt-4 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink"
+                  className="flex px-4 py-2 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink"
                   onClick={ handleHome }
                 >
                   Home
