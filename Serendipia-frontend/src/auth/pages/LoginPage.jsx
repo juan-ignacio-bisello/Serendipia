@@ -53,24 +53,24 @@ export const LoginPage = () => {
           className="..."
         >
             <div className="flex size-2/3 place-content-center justify-self-center py-24">
-                <div className="table-row shadow-xl shadow-Gray justify-between p-28">
+                <div className="table-row w-80 shadow-xl shadow-Gray justify-center rounded-lg p-28">
                     <div className="flex-row">
                         <h3 className="text-White text-2xl">Ingreso</h3>
                         <form onSubmit={ onSubmit }>
-                            <div className="form-group mb-2">
+                            <div className="flex justify-center my-3">
                                 <input 
                                     type="text"
-                                    className="text-gray-500"
+                                    className="text-gray-500 rounded-sm"
                                     placeholder="Correo"
                                     name="loginEmail"
                                     value={ loginEmail }
                                     onChange={ onInputChange }
                                 />
                             </div>
-                            <div className="form-group mb-2">
+                            <div className="flex justify-center my-3">
                                 <input
                                     type="password"
-                                    className="text-gray-500"
+                                    className="text-gray-500 rounded-sm"
                                     placeholder="Contraseña"
                                     name="loginPassword"
                                     value={ loginPassword }
@@ -83,18 +83,11 @@ export const LoginPage = () => {
                                     className="flex px-4 py-2 w-full justify-center text-lg"
                                 >Login</button>
                             </div>
-
-                            {/* <button 
-                              className="flex mt-12 px-4 py-2 w-full justify-center text-lg"
-                              onClick={ onGoogleSingin }
-                            >
-                              Google
-                            </button> */}
-
+                            {/* //TODO: GOOGLE AUTHENTICATION */}
 
                         </form>
 
-                            <div className="flex mt-12 gap-4">
+                            <div className="flex justify-center mt-16 gap-4">
                                 <button 
                                   className="flex px-4 py-2 w-full justify-center text-sm bg-Black text-Gray shadow shadow-Pink hover:shadow-lg hover:shadow-Pink"
                                   onClick={ handleHome }
