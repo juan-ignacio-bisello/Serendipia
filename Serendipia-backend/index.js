@@ -99,7 +99,7 @@ app.get('/sitemap.xml', async (req, res) => {
 
 
 // Fallback a React (SPA)
-app.get('*', (req, res) => {
+app.get('/*splat', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
