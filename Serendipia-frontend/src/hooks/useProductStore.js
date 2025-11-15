@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import serendipiaApi from "../api/SerendipaApi";
-import { setProducts } from "../store/ui/productSlice";
-import { useCallback } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { setProducts } from '../store/ui/productSlice';
+import { useCallback } from 'react';
+import serendipiaApi from '../api';
 
 
 

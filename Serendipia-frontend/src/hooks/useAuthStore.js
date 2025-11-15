@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrorMessage, onLogout, onChecking, onLogin } from '../store';
-import { serendipiaApi } from '../api';
+import serendipiaApi from '../api';
 import { useNavigate } from 'react-router-dom';
 
 export const useAuthStore = () => {
