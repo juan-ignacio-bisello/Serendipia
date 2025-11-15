@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Home -->
+  <url>
+    <loc>https://serendipia.onrender.com/</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Productos (vista general) -->
+  <url>
+    <loc>https://serendipia.onrender.com/productos</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Categorías principales -->
+  <url>
+    <loc>https://serendipia.onrender.com/categoria/hombre</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://serendipia.onrender.com/categoria/mujer</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://serendipia.onrender.com/categoria/accesorios</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contacto -->
+  <url>
+    <loc>https://serendipia.onrender.com/contacto</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Políticas legals -->
+  <url>
+    <loc>https://serendipia.onrender.com/politicas</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://serendipia.onrender.com/terminos</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Plantilla para productos dinámicos (solo ejemplo) -->
+  <!-- Estos NO hace falta incluirlos uno por uno si son muchos -->
+  <!-- Google crawleará los reales según los descubra -->
+  <!-- Si querés generarlos desde MongoDB, te explico cómo hacerlo -->
+  <!-- Ejemplo genérico: -->
+  <!--
+  <url>
+    <loc>https://serendipia.onrender.com/producto/ID_DEL_PRODUCTO</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  -->
+
+</urlset>

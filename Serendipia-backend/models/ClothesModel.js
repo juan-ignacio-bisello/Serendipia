@@ -40,7 +40,11 @@ const ClothesSchema = Schema({
         required: [true, 'Stock is required'],
         min: [0, 'Stock must be a non-negative number']
     },
-
-});
+},
+    
+    {
+        timestamps: true
+    },
+);
 
 module.exports = model('Clothes', ClothesSchema);
