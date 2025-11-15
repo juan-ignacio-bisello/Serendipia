@@ -3,7 +3,7 @@ require('dotenv').config();
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const path = require('path');
-const Clothes = require('./models/Clothes');
+const Clothes = require('./models/ClothesModel');
 
 
 // BD
